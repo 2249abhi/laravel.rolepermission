@@ -36,7 +36,7 @@
     <!-- ============================================================== -->
     <div class="splash-container">
         <div class="card ">
-            <div class="card-header text-center"><!--<a href="#"><img class="logo-img" src="{{ asset('assets/images/logo.png') }}" alt="logo"></a>--><span class="splash-description">{{ __('Cooperative') }}</span></div>
+            <div class="card-header text-center"><!--<a href="#"><img class="logo-img" src="{{ asset('assets/images/logo.png') }}" alt="logo"></a>--><span class="splash-description">{{ __('Role Permission') }}</span></div>
             <div class="card-body">
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
