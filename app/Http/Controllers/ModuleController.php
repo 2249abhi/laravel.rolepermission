@@ -111,6 +111,50 @@ class ModuleController extends Controller
                 Module::create($submodule_data);
             }
        }
+
+        //=========================================================
+        /*
+        $file_path = base_path('routes/web1.php');
+        
+
+        //write route
+        //========================
+        $contents = file_get_contents($file_path);
+
+        // Define the particular text and module name
+$particular_text = "Route::resource('rolepermissions', RolepermissionController::class);";
+$particular_namespace = "use App\Http\Controllers\RolepermissionController;";
+$module_name = "scheme";
+$routeName = "Route::resource('".$module_name."s', ".ucfirst($module_name)."Controller::class);";
+$text_to_append = $routeName."\n    ";
+
+// Step 1: Update the route section
+
+// Find position of the particular text
+$position = strpos($contents, $particular_text);
+
+if ($position !== false) {
+    // Append the new route content
+    $updated_contents = substr_replace($contents, $text_to_append, $position, 0);
+} else {
+    $updated_contents = $contents; // If no position found, keep contents as is
+}
+
+// Step 2: Update the namespace section
+
+// Find position of the particular namespace
+$namespace_position = strpos($updated_contents, $particular_namespace);
+
+if ($namespace_position !== false) {
+    $capital_module_name = ucfirst($module_name)."Controller;";
+    $namespace_to_append = 'use App\Http\Controllers\\'.$capital_module_name."\n";
+    $updated_contents = substr_replace($updated_contents, $namespace_to_append, $namespace_position, 0);
+}
+
+// Step 3: Write the updated contents back to the file
+
+file_put_contents($file_path, $updated_contents);*/
+        //=========================================================
     
         return redirect()->route('modules.index')->with('success','Module created successfully.');
     }
