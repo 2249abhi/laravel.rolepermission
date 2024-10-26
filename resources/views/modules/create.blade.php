@@ -59,24 +59,46 @@
                                             <div class="form-group">
                                                 <strong>Parent Module:</strong>
                                                 <?php $select  = ''; ?>
-                                                {!! Form::select('pid', $modules,0, ['class' => 'form-control']) !!}
+                                                {!! Form::select('pid', $modules,0, ['class' => 'form-control','id'=>'pid']) !!}
                                             </div>
                                         </div>
                                         <div class="col-xs-8 col-sm-8 col-md-8">
                                             <div class="form-group">
-                                                <strong>Name:</strong>
-                                                <input type="text" name="name" class="form-control" placeholder="Name">
+                                                <strong>Name:*</strong>(Must Be Singular(without "s"))
+                                                <input type="text" name="name" required class="form-control" placeholder="Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-8 col-sm-8 col-md-8 action parent" style="display:none;">
+                                            <div class="form-group">
+                                                <strong>Method:*</strong>
+                                                <select class="form-control" name="method">
+                                                    <option value="">--Select--</option>
+                                                    <option value="GET">GET</option>
+                                                    <option VALUE="POST">GET</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-8 col-sm-8 col-md-8 action parent" style="display:none;">
+                                            <div class="form-group">
+                                                <strong>Controller:*</strong>
+                                                <input type="text" name="controller" class="form-control parent" placeholder="Example:ProductController@index">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-8 col-sm-8 col-md-8 action parent" style="display:none;">
+                                            <div class="form-group">
+                                                <strong>Route Name:*</strong>
+                                                <input type="text" name="routename" class="form-control parent" placeholder="Example:products.index">
                                             </div>
                                         </div>
                                         <div class="col-xs-8 col-sm-8 col-md-8 action" style="display:block;">
                                             <div class="form-group">
-                                                <strong>Action:</strong>
+                                                <strong>Action:*</strong>
                                                 <input type="text" name="action" class="form-control" placeholder="Action">
                                             </div>
                                         </div>
                                         <div class="col-xs-8 col-sm-8 col-md-8">
                                             <div class="form-group">
-                                                <strong>Order:</strong>
+                                                <strong>Order:*</strong>
                                                 <input type="number" name="depth" class="form-control" placeholder="Order">
                                             </div>
                                         </div>
@@ -113,27 +135,22 @@
     </div>
 </div>
 <script>
-    $(document).ready(function({
+    $(document).ready(function(){
+        
+        $('#pid').on('change', function() {
+        let pid = $(this).val();
 
-    }));
+        if(pid == 0) {
+            $('.parent').hide();
+        } else {
+            $('.parent').show();
+        }
+
+
+    });
+
+    });
+    
+    
 </script>
-<!-- <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-md-8">
-                        <div class="card">
-                            <div class="card-header">{{ __('Dashboard') }}</div>
-
-                            <div class="card-body">
-                                @if (session('status'))
-                                    <div class="alert alert-success" role="alert">
-                                        {{ session('status') }}
-                                    </div>
-                                @endif
-
-                                {{ __('You are logged in!') }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
 @endsection

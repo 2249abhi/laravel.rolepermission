@@ -87,9 +87,14 @@ class SidebarServiceProvider extends ServiceProvider
                     $response=array();
                     array_push($controller,"dashboard","users");
                     array_push($action,"logout");
+
+                    
                     $response['roledata']=$roledata;
                     $response['action']=array_unique($action);
                     $response['controller']=array_unique($controller);
+
+                    // echo '<pre>';
+                    // print_r($response);die;
                     
                     $view->with('response',$response);
             }

@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="{{ asset('assets/libs/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/fontawesome/css/fontawesome-all.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css') }}">
+    <script src="{{ asset('assets/vendor/jquery/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.js') }}"></script>
+    <script src="{{ asset('assets/vendor/slimscroll/jquery.slimscroll.js') }}"></script>
+    <script src="{{ asset('assets/libs/js/main-js.js') }}"></script>
     <title>{{ config('app.name', 'Laravel 8 User Roles and Permissions Tutorial') }}</title>
     <!-- Styles -->
     <!-- <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet"> -->
@@ -78,9 +82,7 @@
             @endguest
         </div>
     </div>
-    <script src="{{ asset('assets/vendor/jquery/jquery-3.3.1.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.js') }}"></script>
-    <script src="{{ asset('assets/vendor/slimscroll/jquery.slimscroll.js') }}"></script>
-    <script src="{{ asset('assets/libs/js/main-js.js') }}"></script>
+    
+    
 </body>
 </html>

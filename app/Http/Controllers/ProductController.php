@@ -2,8 +2,13 @@
     
 namespace App\Http\Controllers;
     
-use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\Product;
+use Spatie\Permission\Models\Role;
+use DB;
+use Hash;
+use Illuminate\Support\Arr;
     
 class ProductController extends Controller
 { 
@@ -38,6 +43,7 @@ class ProductController extends Controller
      */
     public function create()
     {
+        die('success');
         return view('products.create');
     }
     

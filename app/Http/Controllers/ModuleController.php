@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Module;
 use App\Models\Permission;
+use App\Models\Route;
 use Illuminate\Http\Request;
 
 class ModuleController extends Controller
@@ -71,26 +72,51 @@ class ModuleController extends Controller
         ]);
         $input = $request->all();
 
+        $name = strtolower($input['name']);
         $data = [
             'pid'           => $input['pid'],
-            'name'          => $input['name'],
+            'name'          => ucfirst($name),
             'action'        => $input['pid'] == 0 ? '' : $input['action'],
             'depth'         => $input['depth'],
             'description'   => $input['detail'],
-            'controller'    => 'none',
+            'controller'    => $input['pid'] == 0 ? '' :'none',
             'cid'           => 0,
             'icon'          => 'fa fa-folder'
         ];
+
+        // echo '<pre>';
+        // print_r($input);die;
 
        $module = Module::create($data);
 
        if($input['pid'] == 0 && !empty($input['submodule']) && !empty($module->id))
        {
+            if(!empty($input['submodule'])) {
+                $arr_route =[
+                    'method'    => 'resource',
+                    'path'      =>  strtolower($input['name']).'s',
+                    'name'      =>  ucfirst($input['name']),
+                    'action'    =>  ucfirst($input['name']).'Controller::class'
+                ];
+
+                Route::create($arr_route);
+               
+               
+            } else {
+                // $arr_route =[
+                //     'method'    => 'resource',
+                //     'path'      =>  strtolower($name).'s',
+                //     'name'      =>  null,
+                //     'action'    =>  ucfirst($name).'Controller::class'
+                // ];
+            }
+            
+
             foreach ($input['submodule'] as $key => $module_name) {
 
                 //Create Permission to give as per roles
                 $permission_data = [
-                    'name' => strtolower($input['name']).'-'.$module_name,
+                    'name' => $name.'-'.$module_name,
                     'guard_name' => 'web'
                 ];
 
@@ -102,8 +128,8 @@ class ModuleController extends Controller
                     'name'          => ucfirst($module_name),
                     'action'        => $module_name,
                     'depth'         => ($key+1),
-                    'description'   => ucfirst($input['name']).'-'.ucfirst($module_name),
-                    'controller'    => strtolower($input['name']),
+                    'description'   => ucfirst($name).'-'.ucfirst($module_name),
+                    'controller'    => strtolower($name).'s',
                     'cid'           => 0,
                     'icon'          => 'fa fa-folder'
                 ];

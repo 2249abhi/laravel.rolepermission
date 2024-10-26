@@ -9,40 +9,41 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav flex-column">
                     <li class="nav-divider">
-                                Main Navigation
+                        Permission Management
                     </li>
-                            <li><a class="nav-link" href="{{ route('home') }}">Dashboard</a></li>
-                            <!-- <li><a class="nav-link" href="{{ route('roles.index') }}">Manage Role</a></li>
-                            <li><a class="nav-link" href="{{ route('products.index') }}">Manage Product</a></li>
-                            <li><a class="nav-link" href="{{ route('modules.index') }}">Manage Module</a></li>
-                            <li><a class="nav-link" href="{{ route('rolepermissions.index') }}">Manage Permissions</a></li> -->
+                    <li><a class="nav-link" href="{{ route('home') }}">Dashboard</a></li>
                     <?php 
                     $i = 0;
                     foreach($response['roledata'] as $navaction) { ?>
-                        <li class="nav-item">
-                        <a class="nav-link active" href="#<?= $i; ?>" data-toggle="collapse" aria-expanded="false" data-target="#submenu-<?= $i; ?>" aria-controls="submenu-<?= $i; ?>">
-                            <i class="fa <?=$navaction['ParentModule']['icon']?>"></i><?=$navaction['ParentModule']['name']?> <span class="badge badge-success"><?= $i; ?></span></a>
+                    <li class="nav-item">
+                        <a class="nav-link here" href="#<?= $i; ?>" data-toggle="collapse" aria-expanded="false"
+                            data-target="#submenu-<?= $i; ?>" aria-controls="submenu-<?= $i; ?>">
+                            <i
+                                class="fa <?=$navaction['ParentModule']['icon']?>"></i><?=$navaction['ParentModule']['name']?>
+                            <span class="badge badge-success"><?= $i; ?></span></a>
 
                         <?php if(count($navaction['ChildModule'])){ ?>
-                            <!--========================================-->
-                            <div id="submenu-<?= $i; ?>" class="collapse submenu" style="">
-                                <ul class="nav flex-column">
+                        <!--========================================-->
+                        <div id="submenu-<?= $i; ?>" class="collapse submenu" style=""><!--show-->
+                            <ul class="nav flex-column">
                                 <?php foreach($navaction['ChildModule'] as $Subnavaction) { 
                                     $cusac = lcfirst(str_replace('-', '',ucwords($Subnavaction['action'], "-")));
                                     $cuscont = str_replace('-', '',ucwords($Subnavaction['controller'], "-"));
                                     $str = '';
+                                    $routeName = $Subnavaction['controller'].'.'.$Subnavaction['action'];
+                                    //print_r($Subnavaction);
                                     if(($response['controller'] == $Subnavaction['controller'] || $response['controller'] == $cuscont) && ($response['action'] == $cusac)){
                                         $str="active";
                                     }else{
                                         $str="";
                                     } ?>
-                                    <li class="nav-item">
-                                        <a class="nav-item" href="{{ route($Subnavaction['controller'].'.'.$Subnavaction['action']) }}"><?= $Subnavaction['name'] ?></a>
-                                    </li>
-                                    <?php } ?>
-                                </ul>
-                            </div>
-                            <!--========================================-->
+                                <li class="nav-item">
+                                    <a class="{{ Route::currentRouteName() == $routeName ? 'active' : '' }} nav-item" href="{{ route($routeName) }}"><?= $Subnavaction['name'] ?></a>
+                                </li>
+                                <?php } ?>
+                            </ul>
+                        </div>
+                        <!--========================================-->
                         <?php } ?>
                     </li>
                     <?php $i++; } ?>
