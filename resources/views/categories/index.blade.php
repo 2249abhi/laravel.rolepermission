@@ -40,15 +40,21 @@
                             <td>{{ $category->meta_title }}</td>
                             <td>{{ $category->meta_keyword }}</td>
                             <td>{{ $category->meta_description }}</td>
-                           
+
                             <td>
-                                <a class="btn btn-info" href="{{ route('categories.show',$category->id) }}">Show</a>
-                                <a class="btn btn-primary" href="{{ route('categories.edit',$category->id) }}">Edit</a>
-                                {!! Form::open(['method' => 'DELETE','route' => ['categories.destroy',
-                                $category->id],'style'=>'display:inline'])
-                                !!}
-                                {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                                {!! Form::close() !!}
+                                <form action="{{ route('categories.destroy',$category->id) }}" method="POST">
+                                    <a class="btn btn-info" href="{{ route('categories.show',$category->id) }}">Show</a>
+                                    @can('category-edit')
+                                    <a class="btn btn-primary" href="{{ route('categories.edit',$category->id) }}">Edit</a>
+                                    @endcan
+
+
+                                    @csrf
+                                    @method('DELETE')
+                                    @can('category-delete')
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    @endcan
+                                </form>
                             </td>
                         </tr>
                         @endforeach
