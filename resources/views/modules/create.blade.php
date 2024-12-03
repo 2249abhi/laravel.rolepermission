@@ -114,8 +114,8 @@
                                         </div>
                                         <div class="col-xs-8 col-sm-8 col-md-8">
                                             <div class="form-group">
-                                                <strong>Detail:</strong>
-                                                <textarea class="form-control" style="height:150px" name="detail"
+                                                <strong>Detail:*</strong>
+                                                <textarea class="form-control" required style="height:150px" name="detail"
                                                     placeholder="Detail"></textarea>
                                             </div>
                                         </div>

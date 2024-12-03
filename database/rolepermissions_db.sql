@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2023 at 08:43 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 7.4.33
+-- Generation Time: Dec 03, 2024 at 07:03 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,8 +18,35 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sample1`
+-- Database: `rolepermissions`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `meta_title` varchar(255) DEFAULT NULL,
+  `meta_keyword` text DEFAULT NULL,
+  `meta_description` text DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`, `meta_title`, `meta_keyword`, `meta_description`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
+(1, 'Php', 'Php Interview Question Answer', 'Php Interview Question Answer', 'Php Interview Question Answer for Experienced', NULL, NULL, '2024-12-03 17:57:47', '2024-12-03 17:57:47'),
+(2, 'Mysql', 'Mysql Interview Question Answer', 'Mysql Interview Question Answer', 'Mysql Interview Question Answer for Experienced', NULL, NULL, '2024-12-03 18:02:33', '2024-12-03 18:02:33'),
+(3, 'Laravel', 'Laravel Interview Questions', 'Laravel Interview Questions', 'Laravel Interview Questions', NULL, NULL, '2024-12-03 18:03:21', '2024-12-03 18:03:21');
 
 -- --------------------------------------------------------
 
@@ -29,11 +56,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `failed_jobs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) NOT NULL,
-  `connection` text NOT NULL,
-  `queue` text NOT NULL,
-  `payload` longtext NOT NULL,
-  `exception` longtext NOT NULL,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -45,7 +72,7 @@ CREATE TABLE `failed_jobs` (
 
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) NOT NULL,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -68,7 +95,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 
 CREATE TABLE `model_has_permissions` (
   `permission_id` bigint(20) UNSIGNED NOT NULL,
-  `model_type` varchar(255) NOT NULL,
+  `model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `model_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -80,7 +107,7 @@ CREATE TABLE `model_has_permissions` (
 
 CREATE TABLE `model_has_roles` (
   `role_id` bigint(20) UNSIGNED NOT NULL,
-  `model_type` varchar(255) NOT NULL,
+  `model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `model_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -101,17 +128,17 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 
 CREATE TABLE `modules` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `description` text CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `name` varchar(200) CHARACTER SET utf8 NOT NULL,
+  `description` text CHARACTER SET utf8 DEFAULT NULL,
   `pid` int(11) NOT NULL DEFAULT 0,
   `cid` int(11) DEFAULT NULL,
-  `controller` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `action` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `controller` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `action` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `depth` decimal(6,3) NOT NULL,
   `icon` varchar(20) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `modules`
@@ -119,386 +146,26 @@ CREATE TABLE `modules` (
 
 INSERT INTO `modules` (`id`, `name`, `description`, `pid`, `cid`, `controller`, `action`, `depth`, `icon`, `created_at`, `updated_at`) VALUES
 (1, 'Users', '', 0, NULL, NULL, NULL, '100.000', 'fa fa-user', '2023-09-04 16:34:59', '2023-09-04 11:04:59'),
-(2, 'Change Password', 'Change Password', 1, NULL, 'users', 'change-password', '1.000', NULL, '2018-10-29 11:53:04', '2018-10-29 11:53:04'),
 (3, 'Masters', 'All masters data', 0, NULL, NULL, NULL, '2.000', 'fa fa-asterisk', '2023-03-09 16:48:38', '2023-03-09 11:18:38'),
 (4, 'Roles', '', 3, NULL, 'roles', 'index', '1.000', NULL, '2018-10-29 12:07:19', '2018-10-29 12:07:19'),
 (5, 'Modules', 'module list', 3, NULL, 'modules', 'index', '2.000', NULL, '2018-10-29 12:09:45', '2018-10-29 12:09:45'),
-(6, 'Departments', 'Departments list', 3, NULL, 'Departments', 'index', '3.000', NULL, '2018-10-29 12:10:54', '2018-10-29 12:10:54'),
-(7, 'Assign Role', 'rolespermissions', 1, NULL, 'rolepermissions', 'index', '2.000', NULL, '2018-10-29 12:14:41', '2018-10-29 12:20:18'),
+(7, 'Assign Sidebar Role', 'rolespermissions', 3, NULL, 'rolepermissions', 'index', '2.000', NULL, '2018-10-29 12:14:41', '2018-10-29 12:20:18'),
 (8, 'All Users', 'All users list', 1, NULL, 'users', 'index', '1.000', NULL, '2018-10-29 12:21:10', '2018-10-29 12:21:10'),
-(14, 'Dashboard', 'for all users', 0, NULL, NULL, NULL, '1.000', 'fa fa-dashboard', '2018-11-14 14:31:27', '2018-11-14 14:31:27'),
 (15, 'Dashboard', '', 14, NULL, 'dashboard', 'index', '1.000', NULL, '2018-11-14 14:32:05', '2018-11-14 14:32:05'),
-(24, 'Interface translation', 'User interface translation', 23, 23, 'locale-targets', 'index', '1.000', NULL, '2018-11-30 17:55:26', '2018-11-30 17:55:26'),
-(25, 'Locale String', 'Locale String for translation', 23, 0, 'locale-sources', 'index', '2.000', NULL, '2018-11-30 17:57:28', '2018-11-30 17:57:28'),
-(28, 'Menus', 'Menu list', 27, NULL, 'menus', 'index', '1.000', NULL, '2018-12-26 16:59:49', '2018-12-26 16:59:49'),
-(40, 'Edit Article', '', 16, 17, 'articles', 'edit', '1.000', NULL, '2019-01-24 17:39:48', '2019-01-24 17:39:48'),
-(77, 'Categories', 'gallery categories', 75, 0, 'gallery-categories', 'index', '2.000', NULL, '2019-02-02 13:25:02', '2019-02-02 13:25:02'),
-(85, 'User Logs', 'user-log', 1, 0, 'users', 'user-log', '3.000', NULL, '2019-02-20 17:25:53', '2019-02-20 17:25:53'),
-(89, 'Complaints / Grievance', 'Complaints / Grievance', 27, 0, 'online-enquiry', 'complaints-grievance', '3.000', NULL, '2019-03-04 12:55:10', '2019-03-04 12:55:10'),
-(90, 'Complaints Grievance View', 'Complaints Grievance View', 27, 0, 'online-enquiry', 'complaints-view', '4.000', NULL, '2019-03-04 12:56:15', '2019-03-04 12:56:15'),
-(91, 'Password History', '', 1, 0, 'users', 'change-password-history', '4.000', NULL, '2019-03-07 18:16:59', '2019-03-07 18:16:59'),
-(96, 'Subscription', 'Subscription', 27, 0, 'newsletters', 'index', '7.000', NULL, '2019-05-30 11:40:50', '2019-05-30 11:40:50'),
-(98, 'Add', '', 3, 3, 'bio-sections', 'add', '9.000', NULL, '2020-07-16 11:03:03', '2020-07-16 11:03:03'),
-(99, 'Edit', '', 3, 3, 'bio-sections', 'edit', '12.000', NULL, '2020-07-16 11:03:18', '2020-07-16 11:03:18'),
-(100, 'Delete', '', 3, 3, 'bio-sections', 'delete', '13.000', NULL, '2020-07-16 11:03:31', '2020-07-16 11:03:31'),
-(101, 'View', '', 3, 0, 'bio-sections', 'view', '10.000', NULL, '2020-07-16 11:02:33', '2020-07-16 11:02:33'),
-(104, 'Add', '', 102, 0, 'notifications', 'add', '1.000', NULL, '2020-07-16 12:11:56', '2020-07-16 12:11:56'),
-(105, 'Edit', '', 102, 0, 'notifications', 'edit', '1.000', NULL, '2020-07-16 12:12:30', '2020-07-16 12:12:30'),
-(106, 'View', '', 102, 0, 'notifications', 'view', '1.000', NULL, '2020-07-16 12:13:07', '2020-07-16 12:13:07'),
-(107, 'Delete', '', 102, 0, 'notifications', 'delete', '1.000', NULL, '2020-07-16 12:13:36', '2020-07-16 12:13:36'),
-(109, 'Add', '', 3, 3, 'decoding-governances', 'add', '15.000', NULL, '2020-07-16 11:03:03', '2020-07-16 11:03:03'),
-(110, 'Edit', '', 3, 3, 'decoding-governances', 'edit', '16.000', NULL, '2020-07-16 11:03:18', '2020-07-16 11:03:18'),
-(111, 'Delete', '', 3, 3, 'decoding-governances', 'delete', '17.000', NULL, '2020-07-16 11:03:31', '2020-07-16 11:03:31'),
-(112, 'View', '', 3, 0, 'decoding-governances', 'view', '18.000', NULL, '2020-07-16 11:02:33', '2020-07-16 11:02:33'),
-(117, 'Add', '', 115, 0, 'events', 'add', '1.000', NULL, '2020-07-16 17:48:40', '2020-07-16 17:48:40'),
-(118, 'Edit', '', 115, 0, 'events', 'edit', '1.000', NULL, '2020-07-16 17:49:22', '2020-07-16 17:49:22'),
-(119, 'View', '', 115, 0, 'events', 'view', '1.000', NULL, '2020-07-16 17:50:20', '2020-07-16 17:50:20'),
-(120, 'Delete', '', 115, 0, 'events', 'delete', '1.000', NULL, '2020-07-16 17:51:11', '2020-07-16 17:51:11'),
-(122, 'Add', '', 3, 3, 'global-leaders', 'add', '15.000', NULL, '2020-07-16 11:03:03', '2020-07-16 11:03:03'),
-(123, 'Edit', '', 3, 3, 'global-leaders', 'edit', '16.000', NULL, '2020-07-16 11:03:18', '2020-07-16 11:03:18'),
-(124, 'Delete', '', 3, 3, 'global-leaders', 'delete', '17.000', NULL, '2020-07-16 11:03:31', '2020-07-16 11:03:31'),
-(125, 'View', '', 3, 0, 'global-leaders', 'view', '18.000', NULL, '2020-07-16 11:02:33', '2020-07-16 11:02:33'),
-(130, 'Add', '', 128, 0, 'videos', 'add', '1.000', NULL, '2020-07-17 09:56:31', '2020-07-17 09:56:31'),
-(131, 'View', '', 128, 0, 'videos', 'view', '1.000', NULL, '2020-07-17 09:57:39', '2020-07-17 09:57:39'),
-(132, 'Edit', '', 128, 0, 'videos', 'edit', '1.000', NULL, '2020-07-17 09:58:34', '2020-07-17 09:58:34'),
-(133, 'Delete', '', 128, 0, 'videos', 'delete', '1.000', NULL, '2020-07-17 09:59:31', '2020-07-17 09:59:31'),
-(135, 'Add', '', 3, 3, 'karmyatras', 'add', '20.000', NULL, '2020-07-16 11:03:03', '2020-07-16 11:03:03'),
-(136, 'Edit', '', 3, 3, 'karmyatras', 'edit', '21.000', NULL, '2020-07-16 11:03:18', '2020-07-16 11:03:18'),
-(137, 'Delete', '', 3, 3, 'karmyatras', 'delete', '22.000', NULL, '2020-07-16 11:03:31', '2020-07-16 11:03:31'),
-(138, 'View', '', 3, 0, 'karmyatras', 'view', '23.000', NULL, '2020-07-16 11:02:33', '2020-07-16 11:02:33'),
-(141, 'Photo List', '', 102, 102, 'notifications', 'photo-list', '2.000', NULL, '2020-07-17 16:52:03', '2020-07-17 16:52:03'),
-(144, 'Add', '', 3, 3, 'parliaments', 'add', '25.000', NULL, '2020-07-16 11:03:03', '2020-07-16 11:03:03'),
-(145, 'Edit', '', 3, 3, 'parliaments', 'edit', '26.000', NULL, '2020-07-16 11:03:18', '2020-07-16 11:03:18'),
-(146, 'Delete', '', 3, 3, 'parliaments', 'delete', '27.000', NULL, '2020-07-16 11:03:31', '2020-07-16 11:03:31'),
-(147, 'View', '', 3, 0, 'parliaments', 'view', '28.000', NULL, '2020-07-16 11:02:33', '2020-07-16 11:02:33'),
-(151, 'Add', '', 3, 3, 'karyakartas', 'add', '30.000', NULL, '2020-07-16 11:03:03', '2020-07-16 11:03:03'),
-(152, 'Edit', '', 3, 3, 'karyakartas', 'edit', '31.000', NULL, '2020-07-16 11:03:18', '2020-07-16 11:03:18'),
-(153, 'Delete', '', 3, 3, 'karyakartas', 'delete', '32.000', NULL, '2020-07-16 11:03:31', '2020-07-16 11:03:31'),
-(154, 'View', '', 3, 0, 'karyakartas', 'view', '33.000', NULL, '2020-07-16 11:02:33', '2020-07-16 11:02:33'),
-(158, 'Category', 'Add New Category', 157, NULL, 'multimedia-categories', 'index', '1.000', NULL, '2020-07-21 20:08:03', '2020-07-21 20:08:03'),
-(159, 'Sub Category', 'Add New Subcategory', 157, 0, 'multimedia-subcategories', 'index', '2.000', NULL, '2020-07-21 20:10:38', '2020-07-21 20:10:38'),
-(163, 'Contact List', 'This module give details of contact us form submitted from front end', 162, NULL, 'contact-us', 'index', '1.000', NULL, '2020-07-25 17:26:55', '2020-07-25 17:26:55'),
-(167, 'Speeches / Conferences List', 'Speeches / Press Conferences List', 164, 164, 'speech-and-conferences', 'index', '1.000', NULL, '2020-07-30 17:15:43', '2020-07-30 17:15:43'),
-(169, 'Feedback List', 'Feedback List', 168, NULL, 'feedback', 'index', '1.000', NULL, '2020-08-05 18:59:23', '2020-08-05 18:59:23'),
-(179, 'testdb', 'testdb', 178, NULL, 'Test', 'index', '1.000', NULL, '2022-10-21 23:11:14', '2022-10-21 17:41:14'),
-(180, 'CR - Add Row Contact Number Ajax', 'CR - Add Row Contact Number Ajax', 172, 0, 'cooperative-registrations', 'add-row-contact-number', '6.000', NULL, '2022-10-26 23:25:56', '2022-10-26 17:55:56'),
-(181, 'CR  - Add Row Email Ajax', 'CR  - Add Row Email Ajax', 172, 0, 'cooperative-registrations', 'add-row-email', '7.000', NULL, '2022-10-26 23:32:18', '2022-10-26 18:02:18'),
-(191, 'Add  New User', 'add', 1, 1, 'users', 'add', '2.000', NULL, '2022-12-02 21:18:03', '2022-12-02 15:48:03'),
+(191, 'Add  New User', 'create', 1, 1, 'users', 'create', '2.000', NULL, '2022-12-02 21:18:03', '2022-12-02 15:48:03'),
 (192, 'edit', 'edit', 1, 0, 'users', 'edit', '3.000', NULL, '2022-11-17 22:57:15', '2022-11-17 17:27:15'),
 (193, 'view', 'view', 1, 0, 'users', 'view', '4.000', NULL, '2022-11-17 22:58:32', '2022-11-17 17:28:32'),
-(194, 'Nodal Entry Form', 'Nodal Entry Form', 172, 172, 'district-nodal-entries', 'index', '3.000', NULL, '2023-06-20 17:19:36', '2023-06-20 11:49:36'),
-(195, 'Add Nodal', 'Add Nodal', 172, 0, 'district-nodal-entries', 'add', '4.000', NULL, '2022-11-17 23:43:47', '2022-11-17 18:13:47'),
-(196, 'Edit Nodal entry', 'Edit Nodal entry', 172, 0, 'district-nodal-entries', 'edit', '5.000', NULL, '2022-11-17 23:44:43', '2022-11-17 18:14:43'),
-(197, 'View Nodal entry', 'View Nodal entry', 172, 0, 'district-nodal-entries', 'view', '6.000', NULL, '2022-11-17 23:45:22', '2022-11-17 18:15:22'),
-(201, 'Federation', 'Federation', 3, 0, 'federation', 'index', '30.000', NULL, '2022-11-22 23:45:30', '2022-11-22 18:15:30'),
-(202, 'add', 'add', 3, 0, 'federation', 'add', '31.000', NULL, '2022-11-22 23:46:57', '2022-11-22 18:16:57'),
-(203, 'edit', 'Edit', 3, 0, 'federation', 'edit', '32.000', NULL, '2022-11-22 23:47:43', '2022-11-22 18:17:43'),
-(204, 'Dairy', 'Dairy', 3, 3, 'Dairies', 'index', '35.000', NULL, '2022-11-23 20:00:50', '2022-11-23 14:30:50'),
-(206, 'import', 'import', 3, 0, 'DistrictCentralCooperativeBank', 'import', '2.000', NULL, '2022-11-23 23:27:15', '2022-11-23 17:57:15'),
-(207, 'delete nodal entity form', 'delete nodal entity form', 172, 0, 'district-nodal-entries', 'delete', '2.000', NULL, '2022-11-25 20:43:56', '2022-11-25 15:13:56'),
-(208, 'getdccb', 'getdccb', 172, 0, 'cooperative-registrations', 'getdccb', '23.000', NULL, '2022-11-29 00:15:52', '2022-11-28 18:45:52'),
-(209, 'getfederationlevel', 'getfederationlevel', 172, 0, 'cooperative-registrations', 'getfederationlevel', '24.000', NULL, '2022-12-01 15:58:21', '2022-12-01 10:28:21'),
-(211, 'get-blocks', 'get-blocks', 172, 0, 'cooperative-registrations', 'get-blocks', '25.000', NULL, '2022-12-01 20:03:36', '2022-12-01 14:33:36'),
-(212, 'get-gp', 'get-gp', 172, 0, 'cooperative-registrations', 'get-gp', '26.000', NULL, '2022-12-01 20:05:19', '2022-12-01 14:35:19'),
-(213, 'get-villages', 'get-villages', 172, 0, 'cooperative-registrations', 'get-villages', '27.000', NULL, '2022-12-01 20:06:39', '2022-12-01 14:36:39'),
-(219, 'Return For Correction', 'data entry user->List of cooperative rejected', 172, 172, 'cooperative-registrations', 'data-entry-rejected', '4.000', NULL, '2022-12-13 18:11:57', '2022-12-13 18:11:57'),
-(222, 'Return For Correction', 'District Nodal->List of cooperative rejected', 172, 172, 'cooperative-registrations', 'rejected', '3.000', NULL, '2022-12-13 18:15:36', '2022-12-13 18:15:36'),
-(224, 'Approval', 'District Nodal-> Approval Ajax', 172, 172, 'cooperative-registrations', 'approval', '2.000', NULL, '2022-12-13 18:17:38', '2022-12-13 18:17:38'),
-(226, 'Nodal Entry Form', 'Nodal Entry Form For Admin', 172, 0, 'district-nodal-entries-admin', 'index', '4.000', NULL, '2022-12-15 16:32:55', '2022-12-15 16:32:55'),
-(238, 'Return For Correction', 'Admin->Return For Correction', 172, 0, 'cooperative-registrations', 'admin-rejected', '4.000', NULL, '2022-12-30 16:21:08', '2022-12-30 10:51:08'),
-(241, 'Add National Federation Data Old', 'Add National Federation Data', 240, 240, 'national-federations', 'add', '1.000', NULL, '2023-01-25 20:18:18', '2023-01-25 14:48:18'),
-(242, 'List of National Federations', 'List of National Federations', 240, 0, 'national-federations', 'index', '2.000', NULL, '2023-01-04 20:54:16', '2023-01-04 15:24:16'),
-(243, 'National Federation :: Phone Number Add Row', 'National Federation :: Phone Number Add Row', 240, 0, 'national-federations', 'phone-number-add-row', '3.000', NULL, '2023-01-04 20:54:51', '2023-01-04 15:24:51'),
-(244, 'National Federation :: Email Id Add Row', 'National Federation :: Email Id Add Row', 240, 0, 'national-federations', 'email-id-add-row', '4.000', NULL, '2023-01-04 20:55:33', '2023-01-04 15:25:33'),
-(245, 'National Federation :: Members Add Row', 'National Federation :: Members Add Row', 240, 0, 'national-federations', 'members-add-row', '6.000', NULL, '2023-01-04 20:56:04', '2023-01-04 15:26:04'),
-(246, 'Edit National Federations', 'Edit National Federations', 240, 0, 'national-federations', 'edit', '7.000', NULL, '2023-01-04 20:56:33', '2023-01-04 15:26:33'),
-(247, 'View National Federations', 'View National Federations', 240, 0, 'national-federations', 'view', '8.000', NULL, '2023-01-04 20:57:04', '2023-01-04 15:27:04'),
-(248, 'Delete National Federations', 'Delete National Federations', 240, 0, 'national-federations', 'delete', '8.000', NULL, '2023-01-04 20:57:44', '2023-01-04 15:27:44'),
-(249, 'Add National Federation Data', 'Add National', 240, 240, 'national-federations', 'add-national', '2.000', NULL, '2023-01-25 20:18:45', '2023-01-25 14:48:45'),
-(251, 'National Federation List', 'National Federation List', 240, 0, 'national-federations', 'national', '3.000', NULL, '2023-01-11 01:31:00', '2023-01-10 20:01:00'),
-(252, 'Add Member', 'Add Member', 240, 0, 'national-federations', 'add-member', '4.000', NULL, '2023-01-11 01:31:39', '2023-01-10 20:01:39'),
-(253, 'List Of Members', 'member list', 240, 240, 'national-federations', 'member', '5.000', NULL, '2023-01-25 20:12:05', '2023-01-25 14:42:05'),
-(254, 'sectorAddRow', 'sectorAddRow', 240, 0, 'national-federations', 'sectorAddRow', '6.000', NULL, '2023-01-11 01:32:49', '2023-01-10 20:02:49'),
-(255, 'Edit Member', 'Edit Member', 240, 0, 'national-federations', 'edit-member', '7.000', NULL, '2023-01-11 01:33:18', '2023-01-10 20:03:18'),
-(256, 'View Member', 'View Member', 240, 0, 'national-federations', 'view-member', '8.000', NULL, '2023-01-11 01:33:51', '2023-01-10 20:03:51'),
-(257, 'delete Member', 'delete Member', 240, 0, 'national-federations', 'delete-member', '9.000', NULL, '2023-01-11 01:34:41', '2023-01-10 20:04:41'),
-(258, 'view national', 'view national', 240, 0, 'national-federations', 'view-national', '11.000', NULL, '2023-01-11 01:35:32', '2023-01-10 20:05:32'),
-(259, 'edit national', 'edit national', 240, 0, 'national-federations', 'edit-national', '12.000', NULL, '2023-01-11 01:36:21', '2023-01-10 20:06:21'),
-(267, 'Edit', '', 264, 0, 'state-cooperative-bank', 'edit', '2.000', NULL, '2023-01-17 02:58:27', '2023-01-16 21:28:27'),
-(268, 'View', '', 264, 0, 'state-cooperative-bank', 'view', '3.000', NULL, '2023-01-17 02:58:55', '2023-01-16 21:28:55'),
-(269, 'sector-add-row', 'sector-add-row', 264, 0, 'state-cooperative-bank', 'sector-add-row', '2.000', NULL, '2023-01-17 03:24:48', '2023-01-16 21:54:48'),
-(270, 'Add Memeber', '', 264, 0, 'state-cooperative-bank', 'add-member', '3.000', NULL, '2023-01-17 03:25:55', '2023-01-16 21:55:55'),
-(271, 'Memeber', '', 264, 0, 'state-cooperative-bank', 'member', '3.000', NULL, '2023-01-17 03:26:23', '2023-01-16 21:56:23'),
-(274, 'Generate Certificate', 'Generate Certificate', 273, NULL, 'certificates', 'certificate', '1.000', NULL, '2023-01-17 20:50:47', '2023-01-17 15:20:47'),
-(275, 'Upload Certificate', 'Upload Certificate', 273, 0, 'certificates', 'add', '2.000', NULL, '2023-01-17 20:51:31', '2023-01-17 15:21:31'),
-(276, 'List Certificate', 'List Certificate', 273, 0, 'certificates', 'index', '3.000', NULL, '2023-01-17 20:52:14', '2023-01-17 15:22:14'),
-(279, 'getBlocks', 'getBlocks', 264, 0, 'state-cooperative-bank', 'getBlocks', '3.000', NULL, '2023-01-18 04:15:08', '2023-01-17 22:45:08'),
-(280, 'phone-number-add-row', '', 264, 0, 'state-cooperative-bank', 'phone-number-add-row', '3.000', NULL, '2023-01-18 19:13:23', '2023-01-18 13:43:23'),
-(281, 'Download Certificate', 'Download Certificate', 273, 0, 'certificates', 'download', '3.000', NULL, '2023-01-20 23:07:54', '2023-01-20 17:37:54'),
-(283, 'Generate Certificate', 'generate certificate', 282, 282, 'payment', 'index', '3.000', NULL, '2023-01-27 20:43:45', '2023-01-27 15:13:45'),
-(284, 'Upload  Certificate', 'Upload State-Certificate', 273, 273, 'certificates', 'state-add', '2.000', NULL, '2023-01-25 18:03:26', '2023-01-25 12:33:26'),
-(285, 'Generate Certificate', 'Generate State-Certificate', 273, 273, 'certificates', 'state-certificate', '1.000', NULL, '2023-01-25 18:05:18', '2023-01-25 12:35:18'),
-(286, 'List Certificate', 'List Certificate', 273, 273, 'certificates', 'state-certificate-list', '3.000', NULL, '2023-01-25 17:42:40', '2023-01-25 12:12:40'),
-(287, 'Add Bank Detail', 'district nodal -> Add Intern Bank detail', 282, 282, 'payment', 'add', '2.000', NULL, '2023-01-27 22:30:49', '2023-01-27 17:00:49'),
-(288, 'Edit', 'Edit Intern Bank Detail', 282, 282, 'payment', 'edit', '4.000', NULL, '2023-01-27 22:31:12', '2023-01-27 17:01:12'),
-(291, 'Upload Certificate', 'district nodal -> Generate District Certificate', 282, 282, 'payment', 'upload-district-payment-certificate', '1.000', NULL, '2023-01-27 17:24:23', '2023-01-27 11:54:23'),
-(293, 'State List  Of Certificate', 'State List  Of Certificate', 273, 0, 'certificates-admin', 'admin-statewise-certificate', '2.000', NULL, '2023-01-27 20:29:42', '2023-01-27 14:59:42'),
-(295, 'Delete Payment Certificate', 'Delete Payment Certificate', 282, 0, 'payment', 'delete', '6.000', NULL, '2023-01-27 22:45:32', '2023-01-27 17:15:32'),
-(297, 'Delete Bank Detail', 'Delete Bank Detail', 282, 0, 'payment', 'deletepaymentdetail', '4.000', NULL, '2023-01-31 23:28:42', '2023-01-31 17:58:42'),
-(299, 'List All Certificate', 'List All Certificate', 282, 0, 'payment', 'list-all-payment-certificate', '1.000', NULL, '2023-02-01 22:46:24', '2023-02-01 17:16:24'),
-(301, 'Approval', '', 240, 0, 'national-federations', 'approval', '3.000', NULL, '2023-02-09 04:40:54', '2023-02-08 23:10:54'),
-(302, 'Generate PACS Certificate', 'Generate PACS Certificate', 273, 273, 'certificates', 'pacs-certificate', '1.000', NULL, '2023-02-10 22:16:40', '2023-02-10 16:46:40'),
-(305, 'Generate All Certificate (Revised)', 'Generate All Certificate (Revised)', 273, 0, 'certificates', 'all-certificate', '1.000', NULL, '2023-02-11 03:28:54', '2023-02-10 21:58:54'),
-(312, 'Table Data', 'table dataindex', 311, 311, 'tabledata', 'index', '1.000', NULL, '2023-03-09 20:37:32', '2023-03-09 15:07:32'),
-(313, 'getTableFields', 'getTableFields', 311, 0, 'tabledata', 'getTableFields', '2.000', NULL, '2023-02-20 22:41:15', '2023-02-20 17:11:15'),
-(314, 'viewIndex', 'view Index', 311, 0, 'tabledata', 'viewIndex', '3.000', NULL, '2023-02-20 23:00:58', '2023-02-20 17:30:58'),
-(315, 'executeQuery', 'execute Query', 311, 0, 'tabledata', 'executeQuery', '4.000', NULL, '2023-02-20 23:05:57', '2023-02-20 17:35:57'),
-(316, 'viewExecuteQuery', 'view Execute Query', 311, 0, 'tabledata', 'viewExecuteQuery', '5.000', NULL, '2023-02-20 23:09:12', '2023-02-20 17:39:12'),
-(318, 'Year-wise society register', 'Age-wise registered member report-Admin', 309, 309, 'register-wise-pac', 'index', '1.000', NULL, '2023-02-24 21:40:44', '2023-02-24 16:10:44'),
-(319, 'Number Of Society', 'Number Of Society', 309, 0, 'state-wise-reports', 'index', '3.000', NULL, '2023-02-21 23:03:37', '2023-02-21 17:33:37'),
-(321, 'society', 'society', 309, 0, 'state-wise-reports', 'society', '4.000', NULL, '2023-02-22 16:24:34', '2023-02-22 10:54:34'),
-(322, 'society', 'society', 309, 0, 'water-bodies-report', 'society', '5.000', NULL, '2023-02-22 16:25:18', '2023-02-22 10:55:18'),
-(323, 'List All State Certificate', 'List All State Certificate-Admin', 282, 0, 'payment', 'paymentlist', '2.000', NULL, '2023-02-22 22:56:40', '2023-02-22 17:26:40'),
-(324, 'Get blocks', 'Get blocks by district', 14, 0, 'dashboard', 'get-blocks', '11.000', NULL, '2023-02-23 17:56:35', '2023-02-23 12:26:35'),
-(326, 'Gram Panchayat Chart View', 'Gram Panchayat Chart View', 325, NULL, 'gram-panchayat-chart', 'index', '1.000', NULL, '2023-02-23 21:10:03', '2023-02-23 15:40:03'),
-(328, 'Get blocks', 'Get blocks', 325, 0, 'gram-panchayat-chart', 'get-blocks', '3.000', NULL, '2023-02-23 21:14:45', '2023-02-23 15:44:45'),
-(329, 'viewchart', 'viewchart', 186, 0, 'federation-reports', 'viewchart', '4.000', NULL, '2023-02-24 17:05:18', '2023-02-24 11:35:18'),
-(330, 'available-fedration-state', 'available-fedration-state', 186, 186, 'federation-reports', 'availableFedrationState', '6.000', NULL, '2023-02-24 22:17:54', '2023-02-24 16:47:54'),
-(332, 'getSocietyName', '', 240, 0, 'national-federations', 'getSocietyName', '3.000', NULL, '2023-02-26 03:28:25', '2023-02-25 21:58:25'),
-(333, 'get-society-details', '', 240, 0, 'national-federations', 'get-society-details', '4.000', NULL, '2023-02-26 15:19:10', '2023-02-26 09:49:10'),
-(336, 'StCB Registation', 'List of StCB Registration\r\nRegistration', 335, 335, 'scb-registrations', 'index', '1.000', NULL, '2023-03-25 16:53:13', '2023-03-25 11:23:13'),
-(338, 'schemeAddRow', 'schemeAddRow', 335, 335, 'scb-registrations', 'scheme-add-row', '4.000', NULL, '2023-03-27 22:40:27', '2023-03-27 17:10:27'),
-(339, 'sectorAddRow', 'sectorAddRow', 335, 335, 'scb-registrations', 'sectorAddRow', '3.000', NULL, '2023-03-02 22:10:00', '2023-03-02 16:40:00'),
-(340, 'Overall Count', 'Overall Count', 303, 303, 'gismaps', 'overallCount', '5.000', NULL, '2023-03-15 21:31:54', '2023-03-15 16:01:54'),
-(341, 'Sugar Mills Lat Lon', 'Update Sugar Mills Lat Lon Listing', 303, 303, 'gismaps', 'listing-lat-lon', '2.000', NULL, '2023-03-09 20:11:06', '2023-03-09 14:41:06'),
-(343, 'view Listing Lat Lon', 'view Listing Lat Lon', 303, 303, 'gismaps', 'view-listing-lat-lon', '3.000', NULL, '2023-03-09 20:47:51', '2023-03-09 15:17:51'),
-(344, 'update Lat Lon', 'update Lat Lon', 303, 0, 'gismaps', 'update-latlon', '4.000', NULL, '2023-03-09 20:54:24', '2023-03-09 15:24:24'),
-(345, 'Edit StCB', 'scb-registrations', 335, 0, 'scb-registrations', 'edit', '5.000', NULL, '2023-03-14 18:17:25', '2023-03-14 12:47:25'),
-(346, 'DCB Member List', 'DCB Member List', 359, 0, 'scb-registrations', 'member-list', '6.000', NULL, '2023-03-14 18:18:32', '2023-03-14 12:48:32'),
-(347, 'Add member', 'Add member', 359, 0, 'scb-registrations', 'add-member', '7.000', NULL, '2023-03-14 18:19:40', '2023-03-14 12:49:40'),
-(348, 'Edit member', 'Edit member', 359, 0, 'scb-registrations', 'edit-member', '8.000', NULL, '2023-03-14 18:20:54', '2023-03-14 12:50:54'),
-(349, 'Delete StCB', 'Delete StCB', 335, 335, 'scb-registrations', 'delete', '6.000', NULL, '2023-03-21 22:07:15', '2023-03-21 16:37:15'),
-(350, 'Delete Member', 'Delete Member', 359, 0, 'scb-registrations', 'delete-member', '10.000', NULL, '2023-03-14 18:49:59', '2023-03-14 13:19:59'),
-(351, 'View StCB', 'View StCB', 335, 335, 'scb-registrations', 'view', '7.000', NULL, '2023-03-21 22:07:25', '2023-03-21 16:37:25'),
-(352, 'View Member', 'View Member', 359, 0, 'scb-registrations', 'view-member', '12.000', NULL, '2023-03-14 22:04:24', '2023-03-14 16:34:24'),
-(353, 'Get Society', 'Get Society', 359, 0, 'scb-registrations', 'get-society', '10.000', NULL, '2023-03-15 19:46:32', '2023-03-15 14:16:32'),
-(354, 'MAP Dashboard - Old', 'MAP Dashboard', 303, 303, 'gismaps', 'dashboard', '1.000', NULL, '2023-03-15 21:37:22', '2023-03-15 16:07:22'),
-(356, 'Sugar Mills Federation List', 'Sugar Mills Federation List', 355, 355, 'sugar-mills-federation', 'index', '3.000', NULL, '2023-04-09 23:50:44', '2023-04-09 18:20:44'),
-(360, 'DCB Member List', 'DCB Member List', 335, NULL, 'scb-registrations', 'member-list', '8.000', NULL, '2023-03-21 16:44:24', '2023-03-21 11:14:24'),
-(361, 'View Member', 'View Member', 335, 0, 'scb-registrations', 'view-member', '12.000', NULL, '2023-03-14 22:04:24', '2023-03-14 16:34:24'),
-(363, 'Get All Society', 'Get All Society', 335, 0, 'scb-registrations', 'get-all-society', '13.000', NULL, '2023-03-25 17:43:52', '2023-03-25 12:13:52'),
-(364, 'schemeAddRow', 'dcb schemeAddRow', 359, 359, 'scb-registrations', 'dcb-scheme-add-row', '5.000', NULL, '2023-03-27 22:42:08', '2023-03-27 17:12:08'),
-(368, 'other member add row', 'other member add row', 335, 335, 'scb-registrations', 'other-member-add-row', '14.000', NULL, '2023-03-28 18:22:20', '2023-03-28 12:52:20'),
-(369, 'Get All Society1', 'Get All Society1', 335, 0, 'scb-registrations', 'get-all-society1', '14.000', NULL, '2023-03-25 17:43:52', '2023-03-25 12:13:52'),
-(370, 'Sugar Mills Dashboard', 'Sugar mill Dashboard-Admin', 355, 355, 'sugar-mills-dashboard', 'index', '1.000', NULL, '2023-04-09 23:50:58', '2023-04-09 18:20:58'),
-(371, 'All registration Level', 'all registration Level', 186, 0, 'cooperative-reports', 'allregistrationlevel', '56.000', NULL, '2023-04-03 21:57:46', '2023-04-03 16:27:46'),
-(374, 'State dairy ', 'State dairy  cooperative federation', 373, NULL, 'cooperative-federations', 'add', '1.000', NULL, '2023-04-07 23:33:53', '2023-04-07 18:03:53'),
-(377, 'Fishery Federations List', 'Fishery Federations', 372, 372, 'fishery-federations', 'list', '10.000', NULL, '2023-04-15 18:12:44', '2023-04-15 12:42:44'),
-(378, 'urbanWardAddRow', 'urbanWardAddRow', 372, 0, 'FederationFisheries', 'urbanWardAddRow', '2.000', NULL, '2023-04-10 20:05:39', '2023-04-10 14:35:39'),
-(380, 'scardbAddRow', 'scardbAddRow', 335, 0, 'scb-registrations', 'scardbAddRow', '6.000', NULL, '2023-04-10 21:46:16', '2023-04-10 16:16:16'),
-(381, 'Fishery Federations : Urban Ward Add Row', 'Fishery Federations : Urban Ward Add Row', 372, 0, 'fishery-federations', 'urban-ward-add-row', '10.000', NULL, '2023-04-11 12:36:40', '2023-04-11 07:06:40'),
-(382, 'Fishery Federations: Rural Village Add Row', 'Fishery Federations: Rural Village Add Row', 372, 0, 'fishery-federations', 'rural-village-add-row', '10.000', NULL, '2023-04-11 12:38:55', '2023-04-11 07:08:55'),
-(384, 'SCARDB Registration ', 'List of SCARDB Registration Registration', 383, NULL, 'scardb-registrations', 'index', '1.000', NULL, '2023-04-11 19:07:51', '2023-04-11 13:37:51'),
-(386, 'sectorAddRow', 'sectorAddRow', 383, 0, 'scardb-registrations', 'sectorAddRow', '3.000', NULL, '2023-04-11 19:09:45', '2023-04-11 13:39:45'),
-(387, 'schemeAddRow', 'schemeAddRow', 383, 0, 'scardb-registrations', 'scheme-add-row', '4.000', NULL, '2023-04-11 19:10:26', '2023-04-11 13:40:26'),
-(388, 'View SCARDB', 'View SCARDB', 383, 0, 'scardb-registrations	', 'view', '7.000', NULL, '2023-04-11 19:11:35', '2023-04-11 13:41:35'),
-(389, 'scardbAddRow', 'scardbAddRow', 383, 0, 'scardb-registrations', 'scardbAddRow', '8.000', NULL, '2023-04-11 19:19:11', '2023-04-11 13:49:11'),
-(390, 'Edit SCARDB', 'scardb-registrations', 383, 0, 'scardb-registrations', 'edit', '9.000', NULL, '2023-04-11 19:20:31', '2023-04-11 13:50:31'),
-(395, 'brandAddRow', 'brandAddRow', 391, 391, 'multi-state-cooperative-society', 'brandAddRow', '2.000', NULL, '2023-04-17 22:57:43', '2023-04-17 17:27:43'),
-(396, 'exportAddRow', 'exportAddRow', 391, 391, 'multi-state-cooperative-society', 'exportAddRow', '3.000', NULL, '2023-04-17 22:57:31', '2023-04-17 17:27:31'),
-(397, 'Housing Society', 'Housing Society div', 172, 0, 'cooperative-registrations', 'p-housing', '28.000', NULL, '2023-04-18 21:02:08', '2023-04-18 15:32:08'),
-(398, 'Marketing Society', 'Marketing Society Div', 172, 0, 'cooperative-registrations', 'p-marketing', '28.000', NULL, '2023-04-18 21:02:47', '2023-04-18 15:32:47'),
-(399, 'Credit & Thrift Society', 'Credit & Thrift Society div', 172, 0, 'cooperative-registrations', 'c-thrift', '28.000', NULL, '2023-04-18 21:09:33', '2023-04-18 15:39:33'),
-(400, 'Add State Federation Data', 'Add State Federation Data', 372, 372, 'fishery-federations', 'add', '10.000', NULL, '2023-04-25 21:03:05', '2023-04-25 15:33:05'),
-(403, 'Members List', 'Members List', 372, 372, 'fishery-federations', 'members-list', '10.000', NULL, '2023-04-21 21:13:39', '2023-04-21 15:43:39'),
-(404, 'View Member', 'View Member', 372, 372, 'fishery-federations', 'view-member', '10.000', NULL, '2023-04-21 21:12:56', '2023-04-21 15:42:56'),
-(405, 'Add Member', 'Add Member', 372, 377, 'fishery-federations', 'add-member', '10.000', NULL, '2023-04-21 21:11:54', '2023-04-21 15:41:54'),
-(406, 'Edit Member', 'Edit Member', 372, 377, 'fishery-federations', 'edit-member', '10.000', NULL, '2023-04-21 21:15:18', '2023-04-21 15:45:18'),
-(407, 'Delete Member', 'Delete Member', 372, 377, 'fishery-federations', 'delete-member', '10.000', NULL, '2023-04-21 21:16:32', '2023-04-21 15:46:32'),
-(408, 'Delete Fishery Federation Detail', 'Delete Fishery Federation Detail', 372, 377, 'fishery-federations', 'delete', '10.000', NULL, '2023-04-24 18:12:04', '2023-04-24 12:42:04'),
-(409, 'OLD SCB Public Details', 'OLD SCB Public Details', 335, 335, 'scb-registrations', 'OLD scb-public-detail', '4.000', NULL, '2023-06-06 07:57:56', '2023-06-06 02:27:56'),
-(410, 'OLD SCB Financial Details', 'OLD SCB Financial Details', 335, 335, 'scb-registrations', 'OLD scb-financial-detail', '3.000', NULL, '2023-06-06 07:57:41', '2023-06-06 02:27:41'),
-(411, 'OLD View SCB Financial Details', 'OLD View SCB Financial Details', 335, 335, 'scb-registrations', 'OLD view-scb-financial-detail', '4.000', NULL, '2023-06-06 07:56:46', '2023-06-06 02:26:46'),
-(412, 'OLD View SCB Public Details', 'OLD View SCB Public Details', 335, 335, 'scb-registrations', 'OLD view-scb-public-detail', '5.000', NULL, '2023-06-06 07:56:15', '2023-06-06 02:26:15'),
-(415, 'OLD DSCB Public Details', 'OLD DSCB Public Details', 335, 335, 'scb-registrations', 'OLD dscb-public-detail', '5.000', NULL, '2023-06-06 07:56:27', '2023-06-06 02:26:27'),
-(416, 'OLD View DSCB Public Details', 'OLD View DSCB Public Details', 335, 335, 'scb-registrations', 'OLD view-dscb-public-detail', '6.000', NULL, '2023-06-06 07:55:53', '2023-06-06 02:25:53'),
-(417, 'OLD View DSCB Financial Details', 'OLD View DSCB Financial Details', 335, 335, 'scb-registrations', 'OLD view-dscb-financial-detail', '4.000', NULL, '2023-06-06 07:56:54', '2023-06-06 02:26:54'),
-(418, 'OLD DSCB Financial Details', 'OLD DSCB Financial Details', 335, 335, 'scb-registrations', 'OLD dscb-financial-detail', '3.000', NULL, '2023-06-06 07:57:48', '2023-06-06 02:27:48'),
-(419, 'other member add row', 'other member add row', 383, 0, 'scardb-registrations', 'other-member-add-row', '2.000', NULL, '2023-04-26 16:30:10', '2023-04-26 11:00:10'),
-(422, 'Dairy Federation List', 'Dairy Federation List', 420, 420, 'dairy-federations', 'list', '11.000', NULL, '2023-04-26 22:01:54', '2023-04-26 16:31:54'),
-(423, 'Add State Federation Detail', 'Add State Federation Detail', 420, 420, 'dairy-federations', 'add', '11.000', NULL, '2023-04-26 22:03:14', '2023-04-26 16:33:14'),
-(424, 'Edit State Federation Detail', 'Edit State Federation Detail', 420, 422, 'dairy-federations', 'edit', '11.000', NULL, '2023-04-26 22:05:18', '2023-04-26 16:35:18'),
-(425, 'View State Federation Detail', 'View State Federation Detail', 420, 422, 'dairy-federations', 'view', '11.000', NULL, '2023-04-26 22:06:23', '2023-04-26 16:36:23'),
-(426, 'Delete Dairy Federation Detail', 'Delete Dairy Federation Detail', 420, 422, 'dairy-federations', 'delete', '11.000', NULL, '2023-04-26 22:07:33', '2023-04-26 16:37:33'),
-(427, 'Add Member', 'Add Member', 420, 422, 'dairy-federations', 'add-member', '11.000', NULL, '2023-04-26 22:09:05', '2023-04-26 16:39:05'),
-(428, 'Edit Member', 'Edit Member', 420, 422, 'dairy-federations', 'edit-member', '11.000', NULL, '2023-04-26 22:10:24', '2023-04-26 16:40:24'),
-(429, 'View Member', 'View Member', 420, 422, 'dairy-federations', 'view-member', '11.000', NULL, '2023-04-26 22:11:37', '2023-04-26 16:41:37'),
-(430, 'Delete Member', 'Delete Member', 420, 422, 'dairy-federations', 'delete-member', '11.000', NULL, '2023-04-26 22:12:41', '2023-04-26 16:42:41'),
-(431, 'Members List', 'Members List', 420, 422, 'dairy-federations', 'members-list', '11.000', NULL, '2023-04-26 22:14:12', '2023-04-26 16:44:12'),
-(432, 'Dairy Federations : Urban Ward Add Row', 'Dairy Federations : Urban Ward Add Row', 420, 422, 'dairy-federations', 'urban-ward-add-row', '11.000', NULL, '2023-04-26 22:16:58', '2023-04-26 16:46:58'),
-(433, 'Dairy Federations: Rural Village Add Row', 'Dairy Federations: Rural Village Add Row', 420, 422, 'dairy-federations', 'rural-village-add-row', '11.000', NULL, '2023-04-26 22:18:07', '2023-04-26 16:48:07'),
-(439, 'Labour Society', 'Labour  Society div', 172, 0, 'cooperative-registrations', 'p-labour', '28.000', NULL, '2023-05-02 17:09:13', '2023-05-02 11:39:13'),
-(444, 'Transport Society', 'Transport  Society div', 172, 0, 'cooperative-registrations', 'p-transport', '28.000', NULL, '2023-05-04 21:37:11', '2023-05-04 16:07:11'),
-(445, 'PROCESSING/INDUSTRY', 'PROCESSING/INDUSTRY', 172, 0, 'cooperative-registrations', 'processing', '29.000', NULL, '2023-05-04 23:09:59', '2023-05-04 17:39:59'),
-(447, 'mscs step second', 'mscs step second', 391, 391, 'multi-state-cooperative-society', 'mscs-step-second', '3.000', NULL, '2023-05-08 23:18:16', '2023-05-08 17:48:16'),
-(448, 'mscs step third', 'mscs step third', 391, 391, 'multi-state-cooperative-society', 'mscs-step-third', '4.000', NULL, '2023-05-08 23:16:45', '2023-05-08 17:46:45'),
-(449, 'mscs step fourth', 'mscs step fourth', 391, 391, 'multi-state-cooperative-society', 'mscs-step-fourth', '5.000', NULL, '2023-05-08 23:17:06', '2023-05-08 17:47:06'),
-(450, 'mscs step fifth', 'mscs step fifth', 391, 391, 'multi-state-cooperative-society', 'mscs-step-fifth', '6.000', NULL, '2023-05-08 23:17:29', '2023-05-08 17:47:29'),
-(451, 'mscs step sixth', 'mscs step sixth', 391, 391, 'multi-state-cooperative-society', 'mscs-step-sixth', '7.000', NULL, '2023-05-08 23:17:53', '2023-05-08 17:47:53'),
-(452, 'edit Mscs Step First', 'edit Mscs Step First', 391, 0, 'multi-state-cooperative-society', 'edit-mscs-step-first', '8.000', NULL, '2023-05-08 23:22:42', '2023-05-08 17:52:42'),
-(453, 'edit mscs step second', 'edit mscs step second', 391, 0, 'multi-state-cooperative-society', 'edit-mscs-step-second', '9.000', NULL, '2023-05-08 23:23:44', '2023-05-08 17:53:44'),
-(454, 'edit mscs step third', 'edit mscs step second', 391, 0, 'multi-state-cooperative-society', 'edit-mscs-step-third', '10.000', NULL, '2023-05-08 23:25:50', '2023-05-08 17:55:50'),
-(455, 'edit mscs step fourth', 'edit mscs step fourth', 391, 0, 'multi-state-cooperative-society', 'edit-mscs-step-fourth', '11.000', NULL, '2023-05-08 23:26:59', '2023-05-08 17:56:59'),
-(456, 'edit mscs step fifth', 'edit mscs step fifth', 391, 0, 'multi-state-cooperative-society', 'edit-mscs-step-fifth', '12.000', NULL, '2023-05-08 23:28:08', '2023-05-08 17:58:08'),
-(457, 'edit mscs step sixth', 'edit mscs step sixth', 391, 0, 'multi-state-cooperative-society', 'edit-mscs-step-sixth', '13.000', NULL, '2023-05-08 23:29:12', '2023-05-08 17:59:12'),
-(458, 'List of MSCS Draft', 'List of MSCS Draft', 391, 0, 'multi-state-cooperative-society', 'draft', '14.000', NULL, '2023-05-08 23:34:09', '2023-05-08 18:04:09'),
-(460, 'Handloom & Weavers', 'Handloom & Weavers', 172, 0, 'cooperative-registrations', 'p-handloom', '28.000', NULL, '2023-05-09 22:34:35', '2023-05-09 17:04:35'),
-(461, 'Agriculture & Allied ', 'Agriculture & Allied ', 172, 0, 'cooperative-registrations', 'p-agriculture', '28.000', NULL, '2023-05-11 17:33:48', '2023-05-11 12:03:48'),
-(462, 'Get All Society DCCB', 'Get All Society DCCB', 335, 0, 'scb-registrations', 'get-all-society-dccb', '13.000', NULL, '2023-03-25 17:43:52', '2023-03-25 12:13:52'),
-(463, 'Get All Society1 DCCB', 'Get All Society1 DCCB', 335, 0, 'scb-registrations', 'get-all-society1-dccb', '14.000', NULL, '2023-03-25 17:43:52', '2023-03-25 12:13:52'),
-(464, 'other member add row', 'other member add row', 436, 0, 'pcardb-registrations', 'other member add row', '2.000', NULL, '2023-05-15 20:53:50', '2023-05-15 15:23:50'),
-(465, 'pcardb-add-row', 'pcardb-add-row', 436, 0, 'pcardb-registrations', 'pcardb-add-row', '3.000', NULL, '2023-05-15 20:57:27', '2023-05-15 15:27:27'),
-(466, 'get-all-society', 'get-all-society', 436, 0, 'pcardb-registrations', 'get-all-society', '4.000', NULL, '2023-05-15 20:59:14', '2023-05-15 15:29:14'),
-(467, 'get-all-society1', 'get-all-society1', 436, 0, 'pcardb-registrations', 'get-all-society1', '5.000', NULL, '2023-05-15 21:00:11', '2023-05-15 15:30:11'),
-(469, 'sector-add-row', 'sector-add-row', 436, 0, 'pcardb-registrations', 'sector-add-row', '5.000', NULL, '2023-05-15 21:02:24', '2023-05-15 15:32:24'),
-(470, 'scardb-add-row', 'scardb-add-row', 436, 0, 'pcardb-registrations', 'scardb-add-row', '6.000', NULL, '2023-05-15 21:04:04', '2023-05-15 15:34:04'),
-(471, 'scheme-add-row', 'scheme-add-row', 436, 0, 'pcardb-registrations', 'scheme-add-row', '7.000', NULL, '2023-05-15 21:04:47', '2023-05-15 15:34:47'),
-(472, 'List of Registered PCARDB', 'List of Registered PCARDB', 436, 0, 'pcardb-registrations', 'index', '1.000', NULL, '2023-05-15 21:06:23', '2023-05-15 15:36:23'),
-(473, 'Tribal SC/ST', 'Tribal SC/ST', 172, 0, 'cooperative-registrations', 'p-tribal', '28.000', NULL, '2023-05-16 16:21:16', '2023-05-16 10:51:16'),
-(474, 'Tourism Society', 'Tourism Society', 172, 0, 'cooperative-registrations', 'p-tourism', '28.000', NULL, '2023-05-16 18:48:02', '2023-05-16 13:18:02'),
-(475, 'Handicraft Society', 'Handicraft Society', 172, 0, 'cooperative-registrations', 'p-handicraft', '28.000', NULL, '2023-05-17 21:05:16', '2023-05-17 15:35:16'),
-(479, 'List all Scardb Registrations', 'List all Scardb Registrations', 383, 0, 'scardb-registrations', 'indexlist', '1.000', NULL, '2023-05-20 19:32:12', '2023-05-20 14:02:12'),
-(480, 'log view', 'log view', 172, 0, 'cooperative-registrations', 'log-view', '31.000', NULL, '2023-05-22 16:36:49', '2023-05-22 11:06:49'),
-(481, 'Data Entry Pending', 'data entry pending', 391, 391, 'multi-state-cooperative-society', 'data-entry-pending', '15.000', NULL, '2023-06-26 21:38:40', '2023-06-26 16:08:40'),
-(482, 'UCB Society', 'UCB Society', 172, 0, 'cooperative-registrations', 'p-ucb', '28.000', NULL, '2023-05-22 20:17:55', '2023-05-22 14:47:55'),
-(486, 'Get Sector Graphs', 'Get graphs by sector', 172, 0, 'cooperative-registrations', 'get-sector-graphs', '32.000', NULL, '2023-05-25 15:56:18', '2023-05-25 10:26:18'),
-(487, 'Data Entry Progress Statewise', 'Data Entry Progress statewise', 186, 186, 'state-wise-date-reports', 'index', '57.000', NULL, '2023-05-30 16:58:14', '2023-05-30 11:28:14'),
-(488, 'livestock & poultry society', 'livestock & poultry society', 172, 172, 'cooperative-registrations', 'p-livestock', '28.000', NULL, '2023-06-05 18:18:11', '2023-06-05 12:48:11'),
 (493, 'Profile', 'profile', 1, 1, 'users', 'profile', '5.000', NULL, '2023-06-12 18:30:03', '2023-06-12 13:00:03'),
-(496, 'edit', 'edit Cooperative Institute', 494, 494, 'education-training-institute', 'edit', '2.000', NULL, '2023-06-02 23:31:43', '2023-06-02 18:01:43'),
-(497, 'List of Draft', 'Draft Cooperative Institute', 494, 494, 'education-training-institute', 'draft', '3.000', NULL, '2023-06-06 21:28:12', '2023-06-06 15:58:12'),
-(498, 'view', 'View Cooperative Institute', 494, 494, 'education-training-institute', 'view', '4.000', NULL, '2023-06-02 23:31:23', '2023-06-02 18:01:23'),
-(499, 'delete', 'Delete Cooperative Institute', 494, 0, 'education-training-institute', 'delete', '5.000', NULL, '2023-06-02 23:30:30', '2023-06-02 18:00:30'),
-(504, 'SCB Public Details', 'SCB Public Details', 501, 0, 'scb-reports', 'scb-public-detail', '3.000', NULL, '2023-06-06 07:34:51', '2023-06-06 02:04:51'),
-(505, 'SCB Financial Details', 'SCB Financial Details', 501, 0, 'scb-reports', 'scb-financial-detail', '4.000', NULL, '2023-06-06 07:35:49', '2023-06-06 02:05:49'),
-(507, 'DCB Public Details', 'DSCB Public Details', 501, 0, 'scb-reports', 'dscb-public-detail', '6.000', NULL, '2023-06-06 07:44:27', '2023-06-06 02:14:27'),
-(508, 'DCB Financial Details', 'DSCB Financial Details', 501, 0, 'scb-reports', 'dscb-financial-detail', '7.000', NULL, '2023-06-06 07:45:41', '2023-06-06 02:15:41'),
-(510, 'View SCB Public Details', 'View SCB Public Details', 501, 0, 'scb-reports', 'view-scb-public-detail', '8.000', NULL, '2023-06-06 07:49:18', '2023-06-06 02:19:18'),
-(511, 'View SCB Financial Details', 'View SCB Financial Details', 501, 0, 'scb-reports', 'view-scb-financial-detail', '8.000', NULL, '2023-06-06 07:50:04', '2023-06-06 02:20:04'),
-(513, 'View DCB Public Details', 'View DSCB Public Details', 501, 0, 'scb-reports', 'view-dscb-public-detail', '8.000', NULL, '2023-06-06 07:52:11', '2023-06-06 02:22:12'),
-(514, 'View DCB Financial Details', 'View DSCB Financial Details', 501, 0, 'scb-reports', 'view-dscb-financial-detail', '8.000', NULL, '2023-06-06 07:53:00', '2023-06-06 02:23:00'),
-(516, 'List of  Pending', 'List of  Pending Education Training', 494, 0, 'education-training-institute', 'data-entry-pending', '6.000', NULL, '2023-06-06 21:22:48', '2023-06-06 15:52:48'),
-(517, 'List of Accepted', 'List of Accepted', 494, 0, 'education-training-institute', 'data-entry-accepted', '7.000', NULL, '2023-06-06 21:25:28', '2023-06-06 15:55:28'),
-(518, 'Return for Correction', 'Return for Correction', 494, 494, 'education-training-institute', 'data-entry-rejected', '8.000', NULL, '2023-06-06 21:27:42', '2023-06-06 15:57:42'),
-(519, 'Multipurpose society', 'Multipurpose society', 172, 0, 'cooperative-registrations', 'p-multi', '28.000', NULL, '2023-06-06 21:41:39', '2023-06-06 16:11:39'),
-(522, 'view Index', 'view Index', 436, 0, 'pcardb-registrations', 'viewIndex', '15.000', NULL, '2023-06-08 23:23:54', '2023-06-08 17:53:54'),
-(527, 'List of  Institute Pending', 'list of pending by nodal', 494, 494, 'education-training-institute', 'pending', '9.000', NULL, '2023-06-13 19:19:14', '2023-06-13 13:49:14'),
-(528, 'List of  Institute Accepted', 'list of accepted by nodal', 494, 494, 'education-training-institute', 'accepted', '10.000', NULL, '2023-06-13 19:19:43', '2023-06-13 13:49:43'),
-(529, 'Return for Correction', 'Return for Correction by nodal', 494, 494, 'education-training-institute', 'rejected', '11.000', NULL, '2023-06-12 20:34:31', '2023-06-12 15:04:31'),
-(530, 'Test', 'test', 186, 0, 'cooperative-reports', 'test', '88.000', NULL, '2023-06-12 21:41:25', '2023-06-12 16:11:25'),
-(531, 'List of Registered PCARDB', 'List of Registered PCARDB', 383, 383, 'pcardb-registrations', 'index', '11.000', NULL, '2023-06-12 22:35:47', '2023-06-12 17:05:47'),
-(533, 'apiTargetRealAllIndia', 'apiTargetRealAllIndia', 303, 0, 'gis', 'apiTargetRealAllIndia', '99.000', NULL, '2023-06-12 23:14:20', '2023-06-12 17:44:20'),
-(534, 'Miscellaneous', 'Miscellaneous', 172, 0, 'cooperative-registrations', 'p-miscellaneous', '30.000', NULL, '2023-06-13 17:25:35', '2023-06-13 11:55:35'),
-(536, 'List of Pending Data Entry', 'List of Pending Data Entry', 391, 391, 'multi-state-cooperative-society', 'pending', '18.000', NULL, '2023-06-15 18:28:38', '2023-06-15 12:58:38'),
-(537, 'Sample Form for Data Collection', 'Sample Form for Data Collection', 172, 0, 'cooperative-registrations', 'add', '102.000', NULL, '2023-06-14 20:12:08', '2023-06-14 14:42:08'),
-(538, 'Data Entry Accepted', 'data entry accepted', 391, 391, 'multi-state-cooperative-society', 'data-entry-accepted', '16.000', NULL, '2023-06-26 21:39:05', '2023-06-26 16:09:05'),
-(539, 'List of Accepted Data Entry', 'List of Accepted Data Entry', 391, 391, 'multi-state-cooperative-society', 'accepted', '19.000', NULL, '2023-06-15 18:28:56', '2023-06-15 12:58:56'),
-(540, 'apiTargetRealByState', 'apiTargetRealByState', 303, 0, 'gis', 'apiTargetRealByState', '100.000', NULL, '2023-06-14 23:22:31', '2023-06-14 17:52:31'),
-(541, 'List of Rejected Data Entry', 'List of Rejected Data Entry', 391, 0, 'multi-state-cooperative-society', 'rejected', '20.000', NULL, '2023-06-15 18:30:38', '2023-06-15 13:00:38'),
-(542, 'Rejected from Nodal', 'Rejected from Nodal', 391, 0, 'multi-state-cooperative-society', 'data-entry-rejected', '17.000', NULL, '2023-06-15 18:33:02', '2023-06-15 13:03:02'),
-(543, 'view', 'view', 391, 0, 'multi-state-cooperative-society', 'view', '23.000', NULL, '2023-06-15 20:01:20', '2023-06-15 14:31:20'),
-(545, 'Affiliation with Federation/Union', 'Affiliation with Federation/Union', 186, 0, 'federation-reports', 'viewchart', '2.000', NULL, '2023-06-16 17:03:05', '2023-06-16 11:33:05'),
-(547, 'delete', 'delete', 391, 0, 'multi-state-cooperative-society', 'delete', '24.000', NULL, '2023-06-16 21:44:40', '2023-06-16 16:14:40'),
-(548, 'Credit Miscellaneous', 'Credit Miscellaneous', 172, 0, 'cooperative-registrations', 'p-cmiscellaneous', '30.000', NULL, '2023-06-16 22:44:21', '2023-06-16 17:14:21'),
-(549, 'pcardb member', 'pcardb member', 436, 0, 'pcardb-registrations', 'member', '16.000', NULL, '2023-06-19 17:36:16', '2023-06-19 12:06:16'),
-(551, 'Add Sectors Federations', 'Add Sectors Federations', 550, NULL, 'sectors-federations', 'add', '1.000', NULL, '2023-06-19 22:04:28', '2023-06-19 16:34:28'),
-(552, 'Nodal Entry Form', 'Nodal Entry Form', 172, 0, 'district-nodal-entries', 'adminindex', '1.000', NULL, '2023-06-20 17:20:39', '2023-06-20 11:50:39'),
-(553, 'Export Affiliated Pacs', 'Export Affiliated Pacs', 335, 0, 'scb-registrations', 'affiliated-pacs', '5.000', NULL, '2023-06-20 21:21:57', '2023-06-20 15:51:57'),
-(555, 'view', 'pmg-cooperative-reports-view', 172, 0, 'pmg-cooperative-reports', 'view', '5.000', NULL, '2023-06-20 22:58:22', '2023-06-20 17:28:22'),
-(556, 'PACS Computerization', 'PACS Computerization', 359, 359, 'scb-registrations', 'computerization', '13.000', NULL, '2023-07-12 17:40:56', '2023-07-12 12:10:56'),
-(557, 'Pacs', 'Pacs', 550, 0, 'sectors-federations', 'pacs', '2.000', NULL, '2023-06-22 16:37:34', '2023-06-22 11:07:34'),
-(558, 'All India List of Certificate (Revised)', 'All India List of Certificate (Revised)', 273, 273, 'certificates-admin', 'index-revised', '4.000', NULL, '2023-06-22 21:21:00', '2023-06-22 15:51:00'),
-(561, 'get fed', 'get federation name', 588, 588, 'state-district-federation', 'get-fed', '2.000', NULL, '2023-07-07 17:59:36', '2023-07-07 12:29:36'),
-(562, 'Revised form : Urban Ward Add Row', 'Revised form : Urban Ward Add Row', 172, 172, 'state-district-federation', 'urban-ward-add-row', '105.000', NULL, '2023-07-07 17:25:10', '2023-07-07 11:55:10'),
-(563, 'Revised Form : Rural Village Add Row', 'Revised Form : Rural Village Add Row', 588, 0, 'state-district-federation', 'rural-village-add-row', '3.000', NULL, '2023-07-07 17:58:58', '2023-07-07 12:28:58'),
-(569, 'Computerization all List', 'Computerization all List', 567, 567, 'computerization-reports', 'computerization-all-registration-list', '2.000', NULL, '2023-06-30 23:05:12', '2023-06-30 17:35:12'),
-(570, 'Revised Form : other-member-add-row', 'Revised Form : other-member-add-row', 588, 0, 'state-district-federation', 'other-member-add-row', '4.000', NULL, '2023-07-07 17:59:08', '2023-07-07 12:29:08'),
-(572, 'Generate Certificate', 'generate certificate', 571, 571, 'payment-revised', 'index', '2.000', NULL, '2023-01-27 20:43:45', '2023-01-27 15:13:45'),
-(573, 'Add Bank Detail', 'district nodal -> Add Intern Bank detail', 571, 571, 'payment-revised', 'add', '1.000', NULL, '2023-01-27 22:30:49', '2023-01-27 17:00:49'),
-(574, 'Edit', 'Edit Intern Bank Detail', 571, 571, 'payment-revised', 'edit', '4.000', NULL, '2023-01-27 22:31:12', '2023-01-27 17:01:12'),
-(575, 'Upload Certificate', 'district nodal -> Generate District Certificate', 571, 571, 'payment-revised', 'upload-district-payment-certificate', '3.000', NULL, '2023-01-27 17:24:23', '2023-01-27 11:54:23'),
-(577, 'Delete Payment Certificate', 'Delete Payment Certificate', 571, 0, 'payment-revised', 'delete', '6.000', NULL, '2023-01-27 22:45:32', '2023-01-27 17:15:32'),
-(578, 'Delete Bank Detail', 'Delete Bank Detail', 571, 0, 'payment-revised', 'deletepaymentdetail', '4.000', NULL, '2023-01-31 23:28:42', '2023-01-31 17:58:42'),
-(579, 'List All Certificate', 'List All Certificate', 571, 0, 'payment-revised', 'list-all-payment-certificate', '1.000', NULL, '2023-02-01 22:46:24', '2023-02-01 17:16:24'),
-(580, 'List All State Certificate', 'List All State Certificate-Admin', 571, 0, 'payment-revised', 'paymentlist', '2.000', NULL, '2023-02-22 22:56:40', '2023-02-22 17:26:40'),
-(581, 'Handloom', 'Handloom', 588, 0, 'state-district-federation', 'p-handloom', '5.000', NULL, '2023-07-07 17:59:18', '2023-07-07 12:29:18'),
-(582, 'Nodal Entry Form old', 'Nodal Entry Form', 172, 172, 'district-nodal-entries-old', 'index', '3.000', NULL, '2023-06-20 17:19:36', '2023-06-20 11:49:36'),
-(583, 'Add Nodal old', 'Add Nodal', 172, 0, 'district-nodal-entries-old', 'add', '4.000', NULL, '2022-11-17 23:43:47', '2022-11-17 18:13:47'),
-(584, 'Edit Nodal entry old', 'Edit Nodal entry', 172, 0, 'district-nodal-entries-old', 'edit', '5.000', NULL, '2022-11-17 23:44:43', '2022-11-17 18:14:43'),
-(585, 'View Nodal entry old', 'View Nodal entry', 172, 0, 'district-nodal-entries-old', 'view', '6.000', NULL, '2022-11-17 23:45:22', '2022-11-17 18:15:22'),
-(586, 'delete nodal entity form old', 'delete nodal entity form', 172, 0, 'district-nodal-entries-old', 'delete', '2.000', NULL, '2022-11-25 20:43:56', '2022-11-25 15:13:56'),
-(587, 'Nodal Entry Form old (Admin)', 'Nodal Entry Form', 172, 0, 'district-nodal-entries-old', 'adminindex', '1.000', NULL, '2023-06-20 17:20:39', '2023-06-20 11:50:39'),
-(590, 'Sugar', 'Sugar', 588, 0, 'state-district-federation', 'p-sugar', '6.000', NULL, '2023-07-07 20:33:29', '2023-07-07 15:03:29'),
-(591, 'Tourism', 'Tourism', 588, 0, 'state-district-federation', 'p-tourism', '7.000', NULL, '2023-07-07 20:51:12', '2023-07-07 15:21:12'),
-(592, 'Transport', 'Transport', 588, 0, 'state-district-federation', 'p-transport', '8.000', NULL, '2023-07-07 21:03:42', '2023-07-07 15:33:42'),
-(593, 'Tribal', 'Tribal', 588, 0, 'state-district-federation', 'p-tribal', '9.000', NULL, '2023-07-07 21:14:27', '2023-07-07 15:44:27'),
-(594, 'Women', 'Women', 588, 588, 'state-district-federation', 'p-wocoop', '10.000', NULL, '2023-07-07 21:17:46', '2023-07-07 15:47:46'),
-(595, 'Social', 'Social', 588, 0, 'state-district-federation', 'p-social', '11.000', NULL, '2023-07-07 21:27:28', '2023-07-07 15:57:28'),
-(596, 'Sericulture', 'Sericulture', 588, 0, 'state-district-federation', 'p-sericulture', '12.000', NULL, '2023-07-07 21:28:28', '2023-07-07 15:58:28'),
-(597, 'Processing', 'Processing', 588, 0, 'state-district-federation', 'processing', '13.000', NULL, '2023-07-07 21:29:29', '2023-07-07 15:59:29');
-INSERT INTO `modules` (`id`, `name`, `description`, `pid`, `cid`, `controller`, `action`, `depth`, `icon`, `created_at`, `updated_at`) VALUES
-(598, 'Marketing', 'Marketing', 588, 0, 'state-district-federation', 'p-marketing', '14.000', NULL, '2023-07-07 21:30:23', '2023-07-07 16:00:23'),
-(599, 'Housing', 'Housing', 588, 0, 'state-district-federation', 'p-housing', '15.000', NULL, '2023-07-07 21:31:18', '2023-07-07 16:01:18'),
-(600, 'Multipurpose', 'Multipurpose', 588, 0, 'state-district-federation', 'p-multi', '16.000', NULL, '2023-07-07 21:53:23', '2023-07-07 16:23:23'),
-(601, 'Miscellaneous', 'Miscellaneous', 588, 0, 'state-district-federation', 'p-miscellaneous', '17.000', NULL, '2023-07-07 21:55:04', '2023-07-07 16:25:04'),
-(602, 'Livestock', 'Livestock', 588, 0, 'state-district-federation', 'p-livestock', '18.000', NULL, '2023-07-07 21:56:22', '2023-07-07 16:26:22'),
-(603, 'Labour', 'Labour', 588, 0, 'state-district-federation', 'p-labour', '19.000', NULL, '2023-07-07 21:57:40', '2023-07-07 16:27:40'),
-(604, 'Jute', 'Jute', 588, 0, 'state-district-federation', 'p-jute', '20.000', NULL, '2023-07-07 21:59:42', '2023-07-07 16:29:42'),
-(605, 'Handicraft', 'Handicraft', 588, 0, 'state-district-federation', 'p-handicraft', '21.000', NULL, '2023-07-07 23:47:04', '2023-07-07 18:17:04'),
-(606, 'Education', 'Education', 588, 0, 'state-district-federation', 'p-education', '22.000', NULL, '2023-07-07 23:47:45', '2023-07-07 18:17:45'),
-(607, 'Consumer', 'Consumer', 588, 0, 'state-district-federation', 'p-consumer', '23.000', NULL, '2023-07-07 23:48:31', '2023-07-07 18:18:31'),
-(608, 'Bee', 'Bee', 588, 0, 'state-district-federation', 'p-bee', '24.000', NULL, '2023-07-07 23:49:22', '2023-07-07 18:19:22'),
-(609, 'Agriculture', 'Agriculture', 588, 0, 'state-district-federation', 'p-agriculture', '25.000', NULL, '2023-07-07 23:50:15', '2023-07-07 18:20:15'),
-(610, 'Credit and Thrift', 'Credit and Thrift', 588, 0, 'state-district-federation', 'c-thrift', '26.000', NULL, '2023-07-07 23:51:51', '2023-07-07 18:21:51'),
-(611, 'Miscellaneous Credit', 'Miscellaneous Credit', 588, 0, 'state-district-federation', 'p-cmiscellaneous', '27.000', NULL, '2023-07-07 23:52:58', '2023-07-07 18:22:58'),
-(618, 'State Sector society member count < 1 L', 'State Members Report', 186, 186, 'member-reports', 'index', '10.000', NULL, '2023-07-13 10:15:12', '2023-07-13 04:45:12'),
-(626, 'State wise society & members count', 'Total Society Count with members Report', 186, 0, 'cooperative-reports', 'totalsocietycountreport', '11.000', NULL, '2023-07-20 22:35:37', '2023-07-20 17:05:37'),
-(628, 'List State Payment Certificate', 'state nodal -> List Payment Certificate', 571, 0, 'payment-revised', 'list-state-payment-certificate', '5.000', NULL, '2023-01-27 22:33:51', '2023-01-27 17:03:51'),
-(630, 'List State Certificates', 'List State Certificate for rcs', 571, 0, 'payment-revised', 'list-state-payment-certificate', '2.000', NULL, '2023-02-22 22:56:40', '2023-02-22 17:26:40'),
-(632, 'Society Errors', 'Society Errors', 172, 0, 'society-errors', 'index', '10.000', NULL, '2023-07-28 16:36:15', '2023-07-28 11:06:15'),
-(634, 'Registration Date', 'Registration Date', 633, NULL, 'society-correction', 'registration-date', '1.000', NULL, '2023-07-28 16:53:47', '2023-07-28 11:23:47'),
-(635, 'Registration Date', 'Admin Registration Date listing', 633, 0, 'society-correction', 'admin-registration-date', '2.000', NULL, '2023-07-28 20:57:57', '2023-07-28 15:27:57'),
-(636, 'Registration Name', 'Registration Name', 633, 0, 'society-correction', 'registration-name', '4.000', NULL, '2023-07-31 17:13:27', '2023-07-31 11:43:27'),
-(637, 'No of Members', 'District Nodal No of Members', 633, 0, 'society-correction', 'members', '3.000', NULL, '2023-07-31 12:16:51', '2023-07-31 06:46:51'),
-(638, 'No of Members', 'No of Members for Admin Listing', 633, 0, 'society-correction', 'admin-members', '5.000', NULL, '2023-07-31 12:18:59', '2023-07-31 06:48:59'),
-(640, 'List of Registered PCARDB Draft', 'List of Registered PCARDB Draft', 436, 0, 'pcardb-registrations', 'draft-list', '1.000', NULL, '2023-08-02 16:56:51', '2023-08-02 11:26:51'),
-(641, 'view Draft', 'view Draft', 436, 0, 'pcardb-registrations', 'viewDraft', '15.000', NULL, '2023-08-02 17:05:16', '2023-08-02 11:35:16'),
-(642, 'List of Registered Draft PCARDB', 'List of Registered Draft PCARDB', 383, 383, 'pcardb-registrations', 'draft-list', '11.000', NULL, '2023-08-02 11:51:28', '2023-08-02 06:21:28'),
-(645, 'Pcardb Urban Ward Add Row', 'Urban Ward Add Row Ajax', 436, 0, 'pcardb-registrations', 'urban-ward-add-row', '16.000', NULL, '2023-08-02 17:30:24', '2023-08-02 12:00:24'),
-(646, 'pcardb Rural Village Add Row', 'Rural Village Add Row', 436, 0, 'pcardb-registrations', 'rural-village-add-row', '17.000', NULL, '2023-08-02 17:31:32', '2023-08-02 12:01:32'),
-(648, 'MAP Dashboard', 'MAP Dashboard (Revised)', 303, 303, 'gismaps', 'dashboard-revised', '2.000', NULL, '2023-03-15 21:37:22', '2023-03-15 16:07:22'),
-(650, 'Registration Number', 'Registration Number for district nodal', 633, 0, 'society-correction', 'registration-number', '6.000', NULL, '2023-08-08 15:57:16', '2023-08-08 10:27:16'),
-(651, 'Registration Number', 'Registration Number for Admin', 633, 0, 'society-correction', 'admin-registration-number', '7.000', NULL, '2023-08-08 16:05:12', '2023-08-08 10:35:12'),
-(654, 'Federation Member', 'Federation Member', 588, 588, 'StateDistrictFederationReport', 'member', '37.000', NULL, '2023-08-17 21:17:11', '2023-08-17 15:47:11'),
-(656, 'State Wise MSCS', 'State Wise MSCS', 391, 391, 'multi-state-cooperative-society', 'cooperative-multistate-reports', '21.000', NULL, '2023-06-26 21:38:40', '2023-06-26 16:08:40'),
-(658, 'Delete Society', 'Delete Society with duplicate Registration Number', 633, 0, 'society-correction', 'delete', '8.000', NULL, '2023-08-17 22:39:59', '2023-08-17 17:09:59'),
-(661, 'delete', 'soft delete', 588, 0, 'state-district-federation', 'delete', '39.000', NULL, '2023-08-18 17:35:30', '2023-08-18 12:05:30'),
-(662, 'All Society count', 'All Society count', 660, NULL, 'all-india-society-reports', 'index', '1.000', NULL, '2023-08-21 16:17:14', '2023-08-21 10:47:14'),
-(663, 'Sector Wise Year', 'Sector Wise Year', 186, 0, 'register-wise-pac', 'all-register-wise-sector', '104.000', NULL, '2023-08-28 18:36:56', '2023-08-28 13:06:56'),
-(664, 'add member ajax', 'add member ajax', 588, 0, 'state-district-federation', 'add-member', '40.000', NULL, '2023-08-29 15:48:22', '2023-08-29 10:18:22'),
-(665, 'show members ajax', 'show members ajax', 588, 0, 'state-district-federation', 'show-member', '41.000', NULL, '2023-08-29 15:30:36', '2023-08-29 10:00:36'),
-(667, 'View of Service Questions', '', 668, 668, 'service-questions', 'view', '2.000', NULL, '2023-09-06 16:40:27', '2023-09-06 11:10:27'),
-(670, 'List of Service Questions', '', 668, 0, 'service-questions', 'list', '3.000', NULL, '2023-09-06 16:40:51', '2023-09-06 11:10:51'),
-(671, 'Edit Service Questions', '', 668, 0, 'service-questions', 'edit', '4.000', NULL, '2023-09-06 16:42:33', '2023-09-06 11:12:33'),
-(672, 'List of MSCS', 'List of MSCS', 391, 391, 'multi-state-cooperative-society', 'list-of-mscs', '10.000', NULL, '2023-09-14 18:35:48', '2023-09-14 13:05:48'),
-(676, 'State Nodal', 'State Nodal', 186, 186, 'state-nodal-show-district-wise', 'index', '26.000', NULL, '2023-09-18 19:37:43', '2023-09-18 14:07:43'),
-(677, 'Mobile Number', 'Mobile Number', 633, 633, 'society-correction', 'mobile', '9.000', NULL, '2023-09-19 20:43:19', '2023-09-19 15:13:19'),
-(678, 'Pincode Number', 'Pincode Number', 633, 0, 'society-correction', 'pincode', '10.000', NULL, '2023-09-19 21:21:47', '2023-09-19 15:51:47'),
-(679, 'Federation Name', 'Federation Name', 633, 0, 'society-correction', 'federation', '11.000', NULL, '2023-09-19 21:23:33', '2023-09-19 15:53:33'),
-(680, 'pacswiselist', 'pacs wsise lict', 186, 0, 'state-gp-reports', 'pacswiselist', '5.000', NULL, '2023-09-19 21:56:40', '2023-09-19 16:26:40'),
-(682, 'updatecorrection', 'updatecorrection', 633, 0, 'society-correction', 'updatecorrection', '12.000', NULL, '2023-09-20 16:17:14', '2023-09-20 10:47:14'),
-(683, 'GP Covered Under PACS', 'GP Covered Under PACS', 186, 0, 'state-gp-reports', 'gpcoveredunderpacs', '20.000', NULL, '2023-09-21 16:14:17', '2023-09-21 10:44:17'),
-(684, 'PACS Correction', 'PACS Correction', 633, 0, 'society-correction', 'pacs-correction', '13.000', NULL, '2023-09-22 17:42:30', '2023-09-22 12:12:30');
+(703, 'Product', 'Product Module', 0, 0, '', '', '3.000', NULL, '2024-10-26 12:09:52', '2024-10-26 12:09:52'),
+(704, 'Index', 'Product-Index', 703, 0, 'products', 'index', '1.000', NULL, '2024-10-26 12:09:52', '2024-10-26 12:09:52'),
+(705, 'Create', 'Product-Create', 703, 0, 'products', 'create', '2.000', NULL, '2024-10-26 12:09:52', '2024-10-26 12:09:52'),
+(706, 'Edit', 'Product-Edit', 703, 0, 'products', 'edit', '3.000', NULL, '2024-10-26 12:09:52', '2024-10-26 12:09:52'),
+(707, 'Destroy', 'Product-Destroy', 703, 0, 'products', 'delete', '4.000', NULL, '2024-10-26 12:09:52', '2024-10-26 12:09:52'),
+(708, 'Category', 'Skill Category', 0, 0, '', '', '7.000', NULL, '2024-12-03 16:31:07', '2024-12-03 16:31:07'),
+(709, 'Index', 'Category-Index', 708, 0, 'categories', 'index', '1.000', NULL, '2024-12-03 16:31:07', '2024-12-03 16:31:07'),
+(710, 'Create', 'Category-Create', 708, 0, 'categories', 'create', '2.000', NULL, '2024-12-03 16:31:07', '2024-12-03 16:31:07'),
+(711, 'Edit', 'Category-Edit', 708, 0, 'categories', 'edit', '3.000', NULL, '2024-12-03 16:31:07', '2024-12-03 16:31:07'),
+(712, 'Destroy', 'Category-Destroy', 708, 0, 'categories', 'destroy', '4.000', NULL, '2024-12-03 16:31:07', '2024-12-03 16:31:07');
 
 -- --------------------------------------------------------
 
@@ -507,8 +174,8 @@ INSERT INTO `modules` (`id`, `name`, `description`, `pid`, `cid`, `controller`, 
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(255) NOT NULL,
-  `token` varchar(255) NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -520,8 +187,8 @@ CREATE TABLE `password_resets` (
 
 CREATE TABLE `permissions` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `guard_name` varchar(255) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -535,18 +202,22 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 (2, 'role-create', 'web', '2023-10-06 03:15:55', '2023-10-06 03:15:55'),
 (3, 'role-edit', 'web', '2023-10-06 03:15:55', '2023-10-06 03:15:55'),
 (4, 'role-delete', 'web', '2023-10-06 03:15:55', '2023-10-06 03:15:55'),
-(5, 'product-list', 'web', '2023-10-06 03:15:55', '2023-10-06 03:15:55'),
-(6, 'product-create', 'web', '2023-10-06 03:15:55', '2023-10-06 03:15:55'),
-(7, 'product-edit', 'web', '2023-10-06 03:15:55', '2023-10-06 03:15:55'),
-(8, 'product-delete', 'web', '2023-10-06 03:15:55', '2023-10-06 03:15:55'),
+(5, 'user-list', 'web', NULL, NULL),
+(6, 'user-create', 'web', NULL, NULL),
+(7, 'user-edit', 'web', NULL, NULL),
+(8, 'user-delete', 'web', NULL, NULL),
 (9, 'module-list', 'web', '2023-10-12 03:15:55', '2023-10-12 03:15:55'),
 (10, 'module-create', 'web', '2023-10-06 03:15:55', '2023-10-06 03:15:55'),
 (11, 'module-edit', 'web', '2023-10-06 03:15:55', '2023-10-06 03:15:55'),
 (12, 'module-delete', 'web', '2023-10-06 03:15:55', '2023-10-06 03:15:55'),
-(13, 'product-index', 'web', '2023-11-10 04:42:31', '2023-11-10 04:42:31'),
-(14, 'product-add', 'web', '2023-11-10 04:42:31', '2023-11-10 04:42:31'),
-(15, 'product-edit', 'web', '2023-11-10 04:42:32', '2023-11-10 04:42:32'),
-(16, 'product-delete', 'web', '2023-11-10 04:42:32', '2023-11-10 04:42:32');
+(17, 'product-index', 'web', '2024-10-26 06:39:52', '2024-10-26 06:39:52'),
+(18, 'product-create', 'web', '2024-10-26 06:39:52', '2024-10-26 06:39:52'),
+(19, 'product-edit', 'web', '2024-10-26 06:39:52', '2024-10-26 06:39:52'),
+(20, 'product-delete', 'web', '2024-10-26 06:39:52', '2024-10-26 06:39:52'),
+(22, 'category-index', 'web', '2024-12-03 11:01:07', '2024-12-03 11:01:07'),
+(23, 'category-create', 'web', '2024-12-03 11:01:07', '2024-12-03 11:01:07'),
+(24, 'category-edit', 'web', '2024-12-03 11:01:07', '2024-12-03 11:01:07'),
+(25, 'category-destroy', 'web', '2024-12-03 11:01:07', '2024-12-03 11:01:07');
 
 -- --------------------------------------------------------
 
@@ -556,8 +227,8 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 
 CREATE TABLE `products` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `detail` text NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `detail` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -578,8 +249,8 @@ INSERT INTO `products` (`id`, `name`, `detail`, `created_at`, `updated_at`) VALU
 
 CREATE TABLE `roles` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `guard_name` varchar(255) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -590,8 +261,8 @@ CREATE TABLE `roles` (
 
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
 (1, 'Super Admin', 'web', '2023-10-06 03:15:10', '2023-10-06 03:15:10'),
-(2, 'test DEO', 'web', '2023-10-06 04:27:21', '2023-10-06 04:27:21'),
-(7, 'DEO', 'web', '2023-11-27 18:30:00', NULL);
+(2, 'Manager', 'web', '2023-10-06 04:27:21', '2023-10-06 04:27:21'),
+(7, 'Employee', 'web', '2023-11-27 18:30:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -608,14 +279,13 @@ CREATE TABLE `roles_permissions` (
   `moduletask` varchar(200) NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `roles_permissions`
 --
 
 INSERT INTO `roles_permissions` (`id`, `role_id`, `mid`, `navigationshow`, `module`, `moduletask`, `updated_at`, `created_at`) VALUES
-(24, 1, 12, 0, 'Masters', 'Quotes', '2018-10-29 07:06:35', '2018-10-29 12:36:35'),
 (28, 3, 15, 1, 'Dashboard', 'Dashboard', '2018-11-14 03:32:43', '2018-11-14 14:32:43'),
 (32, 4, 15, 1, 'Dashboard', 'Dashboard', '2018-11-22 18:11:35', '2018-11-23 10:41:35'),
 (59, 4, 18, 1, 'Banners', 'Banner Add ', '2018-11-25 20:05:18', '2018-11-26 12:35:18'),
@@ -638,17 +308,6 @@ INSERT INTO `roles_permissions` (`id`, `role_id`, `mid`, `navigationshow`, `modu
 (588, 1, 76, 0, 'Galleries', 'Galleries', '2019-02-13 08:30:16', '2019-02-13 19:30:16'),
 (589, 1, 77, 0, 'Galleries', 'Categories', '2019-02-13 08:30:16', '2019-02-13 19:30:16'),
 (640, 6, 15, 1, 'Dashboard', 'Dashboard', '2019-02-23 01:28:27', '2019-02-23 12:28:27'),
-(674, 1, 2, 1, 'Users', 'Change Password', '2019-03-07 07:17:16', '2019-03-07 18:17:16'),
-(675, 1, 7, 0, 'Users', 'Assign Role', '2019-03-07 07:17:16', '2019-03-07 18:17:16'),
-(676, 1, 8, 0, 'Users', 'All Users', '2019-03-07 07:17:17', '2019-03-07 18:17:17'),
-(677, 1, 85, 0, 'Users', 'User Logs', '2019-03-07 07:17:17', '2019-03-07 18:17:17'),
-(678, 1, 91, 0, 'Users', 'Password History', '2019-03-07 07:17:17', '2019-03-07 18:17:17'),
-(682, 3, 2, 1, 'Users', 'Change Password', '2019-03-07 07:17:46', '2019-03-07 18:17:45'),
-(683, 3, 85, 0, 'Users', 'User Logs', '2019-03-07 07:17:46', '2019-03-07 18:17:46'),
-(684, 3, 91, 0, 'Users', 'Password History', '2019-03-07 07:17:46', '2019-03-07 18:17:46'),
-(685, 6, 2, 1, 'Users', 'Change Password', '2019-03-07 07:18:00', '2019-03-07 18:18:00'),
-(686, 6, 85, 0, 'Users', 'User Logs', '2019-03-07 07:18:00', '2019-03-07 18:18:00'),
-(687, 6, 91, 0, 'Users', 'Password History', '2019-03-07 07:18:00', '2019-03-07 18:18:00'),
 (737, 1, 28, 0, 'Appearance', 'Menus', '2019-05-30 00:41:07', '2019-05-30 11:41:07'),
 (738, 1, 33, 0, 'Appearance', 'Online Enquiry', '2019-05-30 00:41:08', '2019-05-30 11:41:07'),
 (748, 1, 17, 0, 'Content types', 'Articles', '2019-06-25 03:10:51', '2019-06-25 14:10:51'),
@@ -684,60 +343,9 @@ INSERT INTO `roles_permissions` (`id`, `role_id`, `mid`, `navigationshow`, `modu
 (1148, 1, 142, 1, 'News', 'Add Photo/Video', '2022-10-21 12:04:38', '2022-10-21 17:34:38'),
 (1149, 1, 178, 1, 'News', 'test', '2022-10-21 12:04:38', '2022-10-21 17:34:38'),
 (1150, 1, 179, 1, 'test', 'testdb', '2022-10-21 12:11:52', '2022-10-21 17:41:52'),
-(1363, 2, 198, 1, 'Users', 'getDistricts', '2023-10-09 10:44:38', '2022-11-18 14:37:22'),
 (1364, 8, 15, 1, 'Dashboard', 'Dashboard', '2022-11-18 12:02:46', '2022-11-18 17:32:46'),
-(1374, 1, 4, 0, 'Masters', 'Roles', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1375, 1, 5, 0, 'Masters', 'Modules', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1377, 1, 9, 0, 'Masters', 'Designation', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1378, 1, 10, 0, 'Masters', 'States', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1379, 1, 11, 0, 'Masters', 'Languages', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1380, 1, 13, 0, 'Masters', 'Districts', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1381, 1, 97, 0, 'Masters', 'Biography', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1382, 1, 98, 1, 'Masters', 'Add', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1383, 1, 99, 1, 'Masters', 'Edit', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1384, 1, 100, 1, 'Masters', 'Delete', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1385, 1, 101, 1, 'Masters', 'View', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1386, 1, 108, 0, 'Masters', 'Decoding Governance', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1387, 1, 109, 1, 'Masters', 'Add', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1388, 1, 110, 1, 'Masters', 'Edit', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1389, 1, 111, 1, 'Masters', 'Delete', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1390, 1, 112, 1, 'Masters', 'View', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1391, 1, 121, 0, 'Masters', 'Global Leader', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1392, 1, 122, 1, 'Masters', 'Add', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1393, 1, 123, 1, 'Masters', 'Edit', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1394, 1, 124, 1, 'Masters', 'Delete', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1395, 1, 125, 1, 'Masters', 'View', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1396, 1, 134, 0, 'Masters', 'Karmyatras', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1397, 1, 135, 1, 'Masters', 'Add', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1398, 1, 136, 1, 'Masters', 'Edit', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1399, 1, 137, 1, 'Masters', 'Delete', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1400, 1, 138, 1, 'Masters', 'View', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1401, 1, 143, 0, 'Masters', 'Parliament', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1402, 1, 144, 1, 'Masters', 'Add', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1403, 1, 145, 1, 'Masters', 'Edit', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1404, 1, 146, 1, 'Masters', 'Delete', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1405, 1, 147, 1, 'Masters', 'View', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1406, 1, 150, 0, 'Masters', 'Karyakarta', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1407, 1, 151, 1, 'Masters', 'Add', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1408, 1, 152, 1, 'Masters', 'Edit', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1409, 1, 153, 1, 'Masters', 'Delete', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1410, 1, 154, 1, 'Masters', 'View', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1411, 1, 170, 0, 'Masters', 'Yaadon Ke Pitare Se', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1412, 1, 171, 0, 'Masters', 'In Media ', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1413, 1, 183, 0, 'Masters', 'Primary Activities', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1414, 1, 184, 0, 'Masters', 'Secondary Activities', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1415, 1, 185, 0, 'Masters', 'Area Of Operations', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1416, 1, 190, 0, 'Masters', 'Cooperative Society Types', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1417, 1, 200, 0, 'Masters', 'Audit Categories', '2022-11-22 06:58:47', '2022-11-22 12:28:47'),
-(1646, 8, 8, 0, 'Users', 'All Users', '2022-12-02 10:14:59', '2022-12-02 15:44:59'),
-(1647, 8, 191, 0, 'Users', 'add', '2022-12-02 10:14:59', '2022-12-02 15:44:59'),
-(1648, 8, 192, 1, 'Users', 'edit', '2022-12-02 10:14:59', '2022-12-02 15:44:59'),
-(1649, 8, 193, 1, 'Users', 'view', '2022-12-02 10:14:59', '2022-12-02 15:44:59'),
-(1650, 8, 198, 1, 'Users', 'getDistricts', '2022-12-02 10:14:59', '2022-12-02 15:44:59'),
 (1682, 2, 15, 1, 'Dashboard', 'Dashboard', '2023-10-09 10:44:38', '2022-12-07 16:28:38'),
 (1683, 9, 15, 1, 'Dashboard', 'Dashboard', '2022-12-07 10:58:53', '2022-12-07 16:28:49'),
-(1687, 9, 198, 1, 'Users', 'getDistricts', '2022-12-07 12:09:24', '2022-12-07 17:39:20'),
-(1705, 10, 2, 0, 'Users', 'Change Password', '2022-12-10 06:54:41', '2022-12-10 12:24:35'),
 (1707, 10, 187, 0, 'CooperatIve Reports', 'Reports', '2022-12-10 07:04:26', '2022-12-10 12:34:16'),
 (1708, 10, 188, 0, 'CooperatIve Reports', 'All Registrations', '2022-12-10 07:04:26', '2022-12-10 12:34:16'),
 (1715, 10, 173, 0, 'Cooperative Society', 'List of Cooperative', '2022-12-10 10:44:29', '2022-12-10 16:14:25'),
@@ -966,76 +574,6 @@ INSERT INTO `roles_permissions` (`id`, `role_id`, `mid`, `navigationshow`, `modu
 (4548, 65, 15, 0, 'Dashboard', 'Dashboard', '2023-05-29 04:37:40', '2023-05-29 10:07:40'),
 (4549, 65, 233, 0, 'Dashboard', 'Get districts by state', '2023-05-29 04:37:40', '2023-05-29 10:07:40'),
 (4550, 65, 324, 0, 'Dashboard', 'Get blocks', '2023-05-29 04:37:40', '2023-05-29 10:07:40'),
-(4734, 11, 2, 0, 'Users', 'Change Password', '2023-06-05 05:23:24', '2023-06-05 10:53:24'),
-(4735, 11, 8, 0, 'Users', 'All Users', '2023-06-05 05:23:24', '2023-06-05 10:53:24'),
-(4736, 11, 193, 1, 'Users', 'view', '2023-06-05 05:23:24', '2023-06-05 10:53:24'),
-(4737, 11, 198, 1, 'Users', 'getDistricts', '2023-06-05 05:23:24', '2023-06-05 10:53:24'),
-(4738, 11, 493, 0, 'Users', 'profile', '2023-06-05 05:23:24', '2023-06-05 10:53:24'),
-(4743, 13, 2, 0, 'Users', 'Change Password', '2023-06-05 05:25:41', '2023-06-05 10:55:41'),
-(4744, 13, 198, 1, 'Users', 'getDistricts', '2023-06-05 05:25:41', '2023-06-05 10:55:41'),
-(4745, 13, 493, 0, 'Users', 'profile', '2023-06-05 05:25:41', '2023-06-05 10:55:41'),
-(4753, 14, 2, 1, 'Users', 'Change Password', '2023-06-05 05:25:56', '2023-06-05 10:55:56'),
-(4754, 14, 8, 0, 'Users', 'All Users', '2023-06-05 05:25:56', '2023-06-05 10:55:56'),
-(4755, 14, 191, 1, 'Users', 'Add  New User', '2023-06-05 05:25:56', '2023-06-05 10:55:56'),
-(4756, 14, 192, 1, 'Users', 'edit', '2023-06-05 05:25:56', '2023-06-05 10:55:56'),
-(4757, 14, 193, 1, 'Users', 'view', '2023-06-05 05:25:56', '2023-06-05 10:55:56'),
-(4758, 14, 198, 1, 'Users', 'getDistricts', '2023-06-05 05:25:56', '2023-06-05 10:55:56'),
-(4759, 14, 493, 0, 'Users', 'profile', '2023-06-05 05:25:56', '2023-06-05 10:55:56'),
-(4760, 15, 2, 1, 'Users', 'Change Password', '2023-06-05 05:26:09', '2023-06-05 10:56:09'),
-(4761, 15, 8, 0, 'Users', 'All Users', '2023-06-05 05:26:09', '2023-06-05 10:56:09'),
-(4762, 15, 191, 1, 'Users', 'Add  New User', '2023-06-05 05:26:09', '2023-06-05 10:56:09'),
-(4763, 15, 192, 1, 'Users', 'edit', '2023-06-05 05:26:09', '2023-06-05 10:56:09'),
-(4764, 15, 193, 1, 'Users', 'view', '2023-06-05 05:26:09', '2023-06-05 10:56:09'),
-(4765, 15, 198, 1, 'Users', 'getDistricts', '2023-06-05 05:26:09', '2023-06-05 10:56:09'),
-(4766, 15, 493, 0, 'Users', 'profile', '2023-06-05 05:26:09', '2023-06-05 10:56:09'),
-(4767, 16, 2, 0, 'Users', 'Change Password', '2023-06-05 05:26:30', '2023-06-05 10:56:30'),
-(4768, 16, 8, 0, 'Users', 'All Users', '2023-06-05 05:26:30', '2023-06-05 10:56:30'),
-(4769, 16, 198, 0, 'Users', 'getDistricts', '2023-06-05 05:26:31', '2023-06-05 10:56:31'),
-(4770, 16, 493, 0, 'Users', 'profile', '2023-06-05 05:26:31', '2023-06-05 10:56:31'),
-(4771, 17, 2, 1, 'Users', 'Change Password', '2023-06-05 05:26:40', '2023-06-05 10:56:40'),
-(4772, 17, 493, 0, 'Users', 'profile', '2023-06-05 05:26:40', '2023-06-05 10:56:40'),
-(4773, 18, 493, 0, 'Users', 'profile', '2023-06-05 05:26:47', '2023-06-05 10:56:47'),
-(4774, 19, 493, 0, 'Users', 'profile', '2023-06-05 05:26:55', '2023-06-05 10:56:55'),
-(4775, 20, 2, 0, 'Users', 'Change Password', '2023-06-05 05:27:03', '2023-06-05 10:57:03'),
-(4776, 20, 198, 1, 'Users', 'getDistricts', '2023-06-05 05:27:03', '2023-06-05 10:57:03'),
-(4777, 20, 493, 0, 'Users', 'profile', '2023-06-05 05:27:03', '2023-06-05 10:57:03'),
-(4778, 21, 2, 1, 'Users', 'Change Password', '2023-06-05 05:27:10', '2023-06-05 10:57:10'),
-(4779, 21, 8, 0, 'Users', 'All Users', '2023-06-05 05:27:10', '2023-06-05 10:57:10'),
-(4780, 21, 191, 1, 'Users', 'Add  New User', '2023-06-05 05:27:10', '2023-06-05 10:57:10'),
-(4781, 21, 192, 1, 'Users', 'edit', '2023-06-05 05:27:10', '2023-06-05 10:57:10'),
-(4782, 21, 193, 1, 'Users', 'view', '2023-06-05 05:27:10', '2023-06-05 10:57:10'),
-(4783, 21, 198, 1, 'Users', 'getDistricts', '2023-06-05 05:27:10', '2023-06-05 10:57:10'),
-(4784, 21, 493, 0, 'Users', 'profile', '2023-06-05 05:27:10', '2023-06-05 10:57:10'),
-(4785, 22, 493, 0, 'Users', 'profile', '2023-06-05 05:27:18', '2023-06-05 10:57:18'),
-(4786, 23, 493, 0, 'Users', 'profile', '2023-06-05 05:27:27', '2023-06-05 10:57:27'),
-(4787, 24, 2, 1, 'Users', 'Change Password', '2023-06-05 05:27:36', '2023-06-05 10:57:36'),
-(4788, 24, 8, 0, 'Users', 'All Users', '2023-06-05 05:27:36', '2023-06-05 10:57:36'),
-(4789, 24, 192, 1, 'Users', 'edit', '2023-06-05 05:27:36', '2023-06-05 10:57:36'),
-(4790, 24, 193, 1, 'Users', 'view', '2023-06-05 05:27:36', '2023-06-05 10:57:36'),
-(4791, 24, 198, 1, 'Users', 'getDistricts', '2023-06-05 05:27:36', '2023-06-05 10:57:36'),
-(4792, 24, 493, 0, 'Users', 'profile', '2023-06-05 05:27:36', '2023-06-05 10:57:36'),
-(4793, 25, 2, 1, 'Users', 'Change Password', '2023-06-05 05:27:48', '2023-06-05 10:57:48'),
-(4794, 25, 493, 0, 'Users', 'profile', '2023-06-05 05:27:48', '2023-06-05 10:57:48'),
-(4795, 26, 493, 0, 'Users', 'profile', '2023-06-05 05:28:00', '2023-06-05 10:58:00'),
-(4796, 57, 493, 0, 'Users', 'profile', '2023-06-05 05:28:10', '2023-06-05 10:58:10'),
-(4797, 58, 2, 1, 'Users', 'Change Password', '2023-06-05 05:28:23', '2023-06-05 10:58:23'),
-(4798, 58, 493, 0, 'Users', 'profile', '2023-06-05 05:28:23', '2023-06-05 10:58:23'),
-(4799, 59, 2, 0, 'Users', 'Change Password', '2023-06-05 05:28:36', '2023-06-05 10:58:36'),
-(4800, 59, 198, 1, 'Users', 'getDistricts', '2023-06-05 05:28:36', '2023-06-05 10:58:36'),
-(4801, 59, 493, 0, 'Users', 'profile', '2023-06-05 05:28:36', '2023-06-05 10:58:36'),
-(4802, 60, 2, 0, 'Users', 'Change Password', '2023-06-05 05:28:53', '2023-06-05 10:58:53'),
-(4803, 60, 198, 1, 'Users', 'getDistricts', '2023-06-05 05:28:53', '2023-06-05 10:58:53'),
-(4804, 60, 493, 0, 'Users', 'profile', '2023-06-05 05:28:53', '2023-06-05 10:58:53'),
-(4805, 61, 2, 0, 'Users', 'Change Password', '2023-06-05 05:29:06', '2023-06-05 10:59:06'),
-(4806, 61, 493, 1, 'Users', 'profile', '2023-06-05 05:29:06', '2023-06-05 10:59:06'),
-(4807, 62, 2, 0, 'Users', 'Change Password', '2023-06-05 05:29:15', '2023-06-05 10:59:15'),
-(4808, 62, 493, 0, 'Users', 'profile', '2023-06-05 05:29:15', '2023-06-05 10:59:15'),
-(4809, 63, 2, 0, 'Users', 'Change Password', '2023-06-05 05:29:23', '2023-06-05 10:59:23'),
-(4810, 63, 493, 0, 'Users', 'profile', '2023-06-05 05:29:23', '2023-06-05 10:59:23'),
-(4812, 64, 2, 1, 'Users', 'Change Password', '2023-06-05 05:29:34', '2023-06-05 10:59:34'),
-(4813, 64, 493, 0, 'Users', 'profile', '2023-06-05 05:29:34', '2023-06-05 10:59:34'),
-(4814, 65, 2, 1, 'Users', 'Change Password', '2023-06-05 05:31:03', '2023-06-05 11:01:03'),
-(4815, 65, 493, 0, 'Users', 'profile', '2023-06-05 05:31:03', '2023-06-05 11:01:03'),
 (4853, 1, 502, 0, 'SCB Reports', 'Reports Dashboard', '2023-06-05 21:06:36', '2023-06-06 02:36:36'),
 (4854, 1, 503, 0, 'SCB Reports', 'SCB Audit Report', '2023-06-05 21:06:36', '2023-06-06 02:36:36'),
 (4855, 1, 504, 0, 'SCB Reports', 'SCB Public Details', '2023-06-05 21:06:36', '2023-06-06 02:36:36'),
@@ -1068,9 +606,6 @@ INSERT INTO `roles_permissions` (`id`, `role_id`, `mid`, `navigationshow`, `modu
 (5213, 8, 527, 0, 'Education Training', 'list of pending', '2023-06-12 09:35:15', '2023-06-12 15:05:15'),
 (5214, 8, 528, 0, 'Education Training', 'list of accepted', '2023-06-12 09:35:15', '2023-06-12 15:05:15'),
 (5215, 8, 529, 0, 'Education Training', 'Return for Correction', '2023-06-12 09:35:15', '2023-06-12 15:05:15'),
-(5474, 66, 2, 0, 'Users', 'Change Password', '2023-06-13 09:21:15', '2023-06-13 14:51:15'),
-(5475, 66, 198, 1, 'Users', 'getDistricts', '2023-06-13 09:21:15', '2023-06-13 14:51:15'),
-(5476, 66, 493, 0, 'Users', 'Profile', '2023-06-13 09:21:15', '2023-06-13 14:51:15'),
 (5482, 66, 15, 1, 'Dashboard', 'Dashboard', '2023-06-13 09:28:42', '2023-06-13 14:58:42'),
 (5483, 66, 233, 1, 'Dashboard', 'Get districts by state', '2023-06-13 09:28:42', '2023-06-13 14:58:42'),
 (5484, 66, 324, 1, 'Dashboard', 'Get blocks', '2023-06-13 09:28:42', '2023-06-13 14:58:42'),
@@ -1115,8 +650,7 @@ INSERT INTO `roles_permissions` (`id`, `role_id`, `mid`, `navigationshow`, `modu
 (6074, 25, 349, 1, 'StCB Registration', 'Delete StCB', '2023-06-20 10:22:48', '2023-06-20 15:52:48'),
 (6075, 25, 351, 1, 'StCB Registration', 'View StCB', '2023-06-20 10:22:48', '2023-06-20 15:52:48'),
 (6076, 25, 361, 1, 'StCB Registration', 'View Member', '2023-06-20 10:22:48', '2023-06-20 15:52:48'),
-(6077, 25, 362, 1, 'StCB Registration', 'Get districts', '2023-06-20 10:22:48', '2023-06-20 15:52:48');
-INSERT INTO `roles_permissions` (`id`, `role_id`, `mid`, `navigationshow`, `module`, `moduletask`, `updated_at`, `created_at`) VALUES
+(6077, 25, 362, 1, 'StCB Registration', 'Get districts', '2023-06-20 10:22:48', '2023-06-20 15:52:48'),
 (6078, 25, 363, 1, 'StCB Registration', 'Get All Society', '2023-06-20 10:22:48', '2023-06-20 15:52:48'),
 (6079, 25, 368, 1, 'StCB Registration', 'other member add row', '2023-06-20 10:22:48', '2023-06-20 15:52:48'),
 (6080, 25, 369, 1, 'StCB Registration', 'Get All Society1', '2023-06-20 10:22:48', '2023-06-20 15:52:48'),
@@ -1125,8 +659,6 @@ INSERT INTO `roles_permissions` (`id`, `role_id`, `mid`, `navigationshow`, `modu
 (6083, 25, 553, 1, 'StCB Registration', 'Export Affiliated Pacs', '2023-06-20 10:22:48', '2023-06-20 15:52:48'),
 (6138, 13, 551, 0, 'State Federation', 'Add Sectors Federations', '2023-06-22 05:38:30', '2023-06-22 11:08:30'),
 (6139, 13, 557, 1, 'State Federation', 'Pacs', '2023-06-22 05:38:30', '2023-06-22 11:08:30'),
-(6146, 8, 2, 0, 'Users', 'Change Password', '2023-06-22 06:24:43', '2023-06-22 11:54:43'),
-(6153, 2, 2, 0, 'Users', 'Change Password', '2023-10-09 10:44:38', '2023-06-22 12:45:06'),
 (6312, 14, 479, 0, 'SCARDB Registration', 'List all Scardb Registrations', '2023-06-26 08:45:47', '2023-06-26 14:15:47'),
 (6313, 14, 531, 0, 'SCARDB Registration', 'List of Registered PCARDB', '2023-06-26 08:45:47', '2023-06-26 14:15:47'),
 (6326, 14, 437, 1, 'PCARDB Registration', 'Add New PCARDB', '2023-06-26 09:42:45', '2023-06-26 15:12:45'),
@@ -1208,10 +740,6 @@ INSERT INTO `roles_permissions` (`id`, `role_id`, `mid`, `navigationshow`, `modu
 (6863, 67, 528, 0, 'Education Training', 'List of  Institute Accepted', '2023-07-06 09:50:48', '2023-07-06 15:20:48'),
 (6864, 67, 529, 0, 'Education Training', 'Return for Correction', '2023-07-06 09:50:48', '2023-07-06 15:20:48'),
 (6865, 67, 15, 1, 'Dashboard', 'Dashboard', '2023-07-06 09:58:06', '2023-07-06 15:28:06'),
-(6867, 67, 2, 0, 'Users', 'Change Password', '2023-07-06 10:00:43', '2023-07-06 15:30:43'),
-(6868, 67, 493, 0, 'Users', 'Profile', '2023-07-06 10:00:43', '2023-07-06 15:30:43'),
-(6869, 68, 2, 0, 'Users', 'Change Password', '2023-07-06 10:00:52', '2023-07-06 15:30:52'),
-(6870, 68, 493, 0, 'Users', 'Profile', '2023-07-06 10:00:52', '2023-07-06 15:30:52'),
 (6871, 68, 15, 1, 'Dashboard', 'Dashboard', '2023-07-06 10:01:02', '2023-07-06 15:31:02'),
 (6966, 66, 210, 1, 'Cooperative Societies', 'get-districts', '2023-07-10 11:18:03', '2023-07-10 16:48:03'),
 (6967, 66, 214, 1, 'Cooperative Societies', 'get-primary-activity', '2023-07-10 11:18:03', '2023-07-10 16:48:03'),
@@ -1228,7 +756,8 @@ INSERT INTO `roles_permissions` (`id`, `role_id`, `mid`, `navigationshow`, `modu
 (7087, 14, 580, 0, 'Payment (Revised)', 'List All State Certificate', '2023-07-12 05:56:13', '2023-07-12 11:26:13'),
 (7088, 17, 354, 0, 'GIS MAPs', 'MAP Dashboard', '2023-07-12 07:40:50', '2023-07-12 13:10:50'),
 (7175, 25, 346, 0, 'DCB Registration', 'DCB Member List', '2023-07-13 11:16:57', '2023-07-13 16:46:57'),
-(7176, 25, 347, 1, 'DCB Registration', 'Add member', '2023-07-13 11:16:57', '2023-07-13 16:46:57'),
+(7176, 25, 347, 1, 'DCB Registration', 'Add member', '2023-07-13 11:16:57', '2023-07-13 16:46:57');
+INSERT INTO `roles_permissions` (`id`, `role_id`, `mid`, `navigationshow`, `module`, `moduletask`, `updated_at`, `created_at`) VALUES
 (7177, 25, 348, 1, 'DCB Registration', 'Edit member', '2023-07-13 11:16:57', '2023-07-13 16:46:57'),
 (7178, 25, 350, 1, 'DCB Registration', 'Delete Member', '2023-07-13 11:16:57', '2023-07-13 16:46:57'),
 (7179, 25, 352, 1, 'DCB Registration', 'View Member', '2023-07-13 11:16:57', '2023-07-13 16:46:57'),
@@ -1383,10 +912,6 @@ INSERT INTO `roles_permissions` (`id`, `role_id`, `mid`, `navigationshow`, `modu
 (8184, 12, 568, 0, 'Computerization Reports', 'PACS Report of Computerization', '2023-08-04 06:20:02', '2023-08-04 11:50:02'),
 (8185, 12, 569, 1, 'Computerization Reports', 'Computerization all List', '2023-08-04 06:20:02', '2023-08-04 11:50:02'),
 (8186, 12, 619, 1, 'Computerization Reports', 'Computerization Reports', '2023-08-04 06:20:02', '2023-08-04 11:50:02'),
-(8214, 12, 2, 0, 'Users', 'Change Password', '2023-08-07 09:30:01', '2023-08-07 15:00:01'),
-(8215, 12, 8, 0, 'Users', 'All Users', '2023-08-07 09:30:01', '2023-08-07 15:00:01'),
-(8216, 12, 198, 1, 'Users', 'getDistricts', '2023-08-07 09:30:01', '2023-08-07 15:00:01'),
-(8217, 12, 493, 1, 'Users', 'Profile', '2023-08-07 09:30:01', '2023-08-07 15:00:01'),
 (8218, 12, 15, 1, 'Dashboard', 'Dashboard', '2023-08-07 09:30:25', '2023-08-07 15:00:25'),
 (8219, 12, 233, 1, 'Dashboard', 'Get districts by state', '2023-08-07 09:30:25', '2023-08-07 15:00:25'),
 (8220, 12, 188, 0, 'Analytical Report/ Dashboard', 'All Registrations Report', '2023-08-07 09:35:28', '2023-08-07 15:05:28'),
@@ -1558,8 +1083,7 @@ INSERT INTO `roles_permissions` (`id`, `role_id`, `mid`, `navigationshow`, `modu
 (9214, 11, 651, 0, 'Society Correction', 'Registration Number', '2023-09-22 07:02:30', '2023-09-22 12:32:30'),
 (9215, 11, 677, 0, 'Society Correction', 'Mobile Number', '2023-09-22 07:02:30', '2023-09-22 12:32:30'),
 (9216, 11, 678, 0, 'Society Correction', 'Pincode Number', '2023-09-22 07:02:30', '2023-09-22 12:32:30'),
-(9217, 11, 679, 0, 'Society Correction', 'Federation Name', '2023-09-22 07:02:30', '2023-09-22 12:32:30');
-INSERT INTO `roles_permissions` (`id`, `role_id`, `mid`, `navigationshow`, `module`, `moduletask`, `updated_at`, `created_at`) VALUES
+(9217, 11, 679, 0, 'Society Correction', 'Federation Name', '2023-09-22 07:02:30', '2023-09-22 12:32:30'),
 (9218, 11, 684, 0, 'Society Correction', 'PACS Correction', '2023-09-22 07:02:30', '2023-09-22 12:32:30'),
 (9219, 8, 634, 0, 'Society Correction', 'Registration Date', '2023-09-22 07:02:57', '2023-09-22 12:32:57'),
 (9220, 8, 636, 0, 'Society Correction', 'Registration Name', '2023-09-22 07:02:57', '2023-09-22 12:32:57'),
@@ -1621,11 +1145,22 @@ INSERT INTO `roles_permissions` (`id`, `role_id`, `mid`, `navigationshow`, `modu
 (9283, 2, 236, 1, 'Analytical Report/ Dashboard', 'get-districts', '2023-11-28 03:26:14', '2023-11-28 08:56:14'),
 (9284, 2, 478, 0, 'Analytical Report/ Dashboard', 'GP Covered  Report', '2023-11-28 03:26:14', '2023-11-28 08:56:14'),
 (9285, 2, 680, 1, 'Analytical Report/ Dashboard', 'pacswiselist', '2023-11-28 03:26:14', '2023-11-28 08:56:14'),
-(9287, 7, 192, 1, 'Users', 'edit', '2023-11-28 03:30:57', '2023-11-28 09:00:57'),
-(9288, 7, 193, 1, 'Users', 'view', '2023-11-28 03:30:57', '2023-11-28 09:00:57'),
-(9290, 7, 8, 0, 'Users', 'All Users', '2023-11-29 01:28:08', '2023-11-29 06:58:08'),
-(9291, 7, 192, 1, 'Users', 'edit', '2023-11-29 01:28:08', '2023-11-29 06:58:08'),
-(9292, 7, 193, 1, 'Users', 'view', '2023-11-29 01:28:08', '2023-11-29 06:58:08');
+(9386, 1, 4, 0, 'Masters', 'Roles', '2024-10-26 02:23:01', '2024-10-26 07:53:01'),
+(9387, 1, 5, 0, 'Masters', 'Modules', '2024-10-26 02:23:01', '2024-10-26 07:53:01'),
+(9388, 1, 7, 0, 'Masters', 'Assign Sidebar Role', '2024-10-26 02:23:01', '2024-10-26 07:53:01'),
+(9405, 1, 8, 0, 'User', 'All Users', '2024-10-26 15:05:23', '2024-10-26 14:57:33'),
+(9406, 1, 191, 0, 'User', 'Add  New User', '2024-10-26 15:05:27', '2024-10-26 14:57:33'),
+(9407, 1, 192, 1, 'User', 'edit', '2024-10-26 15:05:32', '2024-10-26 14:57:33'),
+(9408, 1, 193, 1, 'User', 'view', '2024-10-26 15:05:37', '2024-10-26 14:57:33'),
+(9409, 1, 493, 1, 'User', 'Profile', '2024-10-26 15:05:41', '2024-10-26 14:57:33'),
+(9410, 7, 709, 0, 'Category', 'Index', '2024-12-03 11:13:41', '2024-12-03 16:43:41'),
+(9411, 7, 710, 1, 'Category', 'Create', '2024-12-03 11:13:41', '2024-12-03 16:43:41'),
+(9412, 7, 711, 1, 'Category', 'Edit', '2024-12-03 11:13:41', '2024-12-03 16:43:41'),
+(9413, 7, 712, 1, 'Category', 'Destroy', '2024-12-03 11:13:41', '2024-12-03 16:43:41'),
+(9414, 7, 704, 0, 'Product', 'Index', '2024-12-03 11:56:43', '2024-12-03 17:26:43'),
+(9415, 7, 705, 1, 'Product', 'Create', '2024-12-03 11:56:43', '2024-12-03 17:26:43'),
+(9416, 7, 706, 1, 'Product', 'Edit', '2024-12-03 11:56:43', '2024-12-03 17:26:43'),
+(9417, 7, 707, 1, 'Product', 'Destroy', '2024-12-03 11:56:43', '2024-12-03 17:26:43');
 
 -- --------------------------------------------------------
 
@@ -1648,20 +1183,24 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (3, 1),
 (4, 1),
 (5, 1),
-(5, 2),
-(5, 7),
 (6, 1),
-(6, 2),
-(6, 7),
 (7, 1),
-(7, 2),
-(7, 7),
 (8, 1),
-(8, 7),
 (9, 1),
 (10, 1),
 (11, 1),
-(12, 1);
+(12, 1),
+(17, 1),
+(17, 7),
+(18, 1),
+(18, 7),
+(19, 1),
+(19, 7),
+(20, 7),
+(22, 7),
+(23, 7),
+(24, 7),
+(25, 7);
 
 -- --------------------------------------------------------
 
@@ -1671,12 +1210,13 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `hint` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `role_id` int(11) DEFAULT NULL,
-  `remember_token` varchar(100) DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1685,14 +1225,20 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role_id`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Super Admin', 'admin@gmail.com', NULL, '$2y$10$tqVbM1v1Skih/IITHr2EMOWxY5Sk9H19RsncC0xQyLtMc1Mt55WsK', 1, NULL, '2023-10-06 03:15:10', '2023-10-06 03:15:10'),
-(2, 'testdeo', 'testdeo@gmail.com', NULL, '$2y$10$4pq12qXAcAw4pT.YIcLaZuChPvT4BIMZuqa3D1E1e/.pVzaq2wRkK', 7, NULL, '2023-10-06 04:28:29', '2023-10-06 04:28:29'),
-(3, 'First DEO', 'anayat123@gmail.com', NULL, '$2y$10$JnWa6gemywpIfeKK0dlVfeU3yHomZAOE3d2ObhHruI5rhMvi2rjdG', 7, NULL, '2023-11-28 03:31:46', '2023-11-28 03:31:46');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `hint`, `role_id`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Super Admin', 'admin@gmail.com', NULL, '$2y$10$tqVbM1v1Skih/IITHr2EMOWxY5Sk9H19RsncC0xQyLtMc1Mt55WsK', '123456', 1, NULL, '2023-10-06 03:15:10', '2023-10-06 03:15:10'),
+(2, 'Manager', 'manager@gmail.com', NULL, '$2y$10$tqVbM1v1Skih/IITHr2EMOWxY5Sk9H19RsncC0xQyLtMc1Mt55WsK', '123456', 7, NULL, '2023-10-06 04:28:29', '2023-10-06 04:28:29'),
+(3, 'Employee', 'employee@gmail.com', NULL, '$2y$10$tqVbM1v1Skih/IITHr2EMOWxY5Sk9H19RsncC0xQyLtMc1Mt55WsK', '123456', 7, NULL, '2023-11-28 03:31:46', '2023-11-28 03:31:46');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `failed_jobs`
@@ -1706,13 +1252,6 @@ ALTER TABLE `failed_jobs`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `model_has_permissions`
---
-ALTER TABLE `model_has_permissions`
-  ADD PRIMARY KEY (`permission_id`,`model_id`,`model_type`),
-  ADD KEY `model_has_permissions_model_id_model_type_index` (`model_id`,`model_type`);
 
 --
 -- Indexes for table `model_has_roles`
@@ -1776,6 +1315,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -1791,13 +1336,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `modules`
 --
 ALTER TABLE `modules`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=698;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=713;
 
 --
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -1815,7 +1360,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `roles_permissions`
 --
 ALTER TABLE `roles_permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9293;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9418;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -1826,12 +1371,6 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `model_has_permissions`
---
-ALTER TABLE `model_has_permissions`
-  ADD CONSTRAINT `model_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `model_has_roles`

@@ -34,7 +34,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="pull-left">
-                                Module Detail
+                                <h2>{{ $m_name }}</h2>
                             </div>
                             <div class="pull-right" style="text-align:right;">
                                 @can('module-create')

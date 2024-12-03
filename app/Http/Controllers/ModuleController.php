@@ -30,17 +30,18 @@ class ModuleController extends Controller
     public function index(Request $request)
     {
         $pid = $request->input('pid');
-
+        $m_name = '';
         //return pid;
             if(isset($pid) && !empty($pid))
             {
+                $m_name = Module::find($pid)->name;
                 $modules = Module::where('pid',$request->input('pid'))->paginate(10);
                
             } else {
                 $modules = Module::where('pid',0)->paginate(10);
             }
 
-            return view('modules.index',compact('modules'))->with('i', (request()->input('page', 1) - 1) * 10);
+            return view('modules.index',compact('modules','m_name'))->with('i', (request()->input('page', 1) - 1) * 10);
     }
 
     /**
@@ -91,7 +92,7 @@ class ModuleController extends Controller
 
        if($input['pid'] == 0 && !empty($input['submodule']) && !empty($module->id))
        {
-            if(!empty($input['submodule'])) {
+            /* if(!empty($input['submodule'])) {
                 $arr_route =[
                     'method'    => 'resource',
                     'path'      =>  strtolower($input['name']).'s',
@@ -109,9 +110,8 @@ class ModuleController extends Controller
                 //     'name'      =>  null,
                 //     'action'    =>  ucfirst($name).'Controller::class'
                 // ];
-            }
+            } */
             
-
             foreach ($input['submodule'] as $key => $module_name) {
 
                 //Create Permission to give as per roles
