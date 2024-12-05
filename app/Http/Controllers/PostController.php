@@ -4,20 +4,20 @@ namespace App\Http\Controllers;
     
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Post;
 use App\Models\Category;
-use Spatie\Permission\Models\Role;
 use DB;
 use Hash;
 use Illuminate\Support\Arr;
     
-class CategoryController extends Controller
+class PostController extends Controller
 {
     function __construct()
     {
-         $this->middleware('permission:category-list|category-create|category-edit|category-delete', ['only' => ['index','show']]);
-         $this->middleware('permission:category-create', ['only' => ['create','store']]);
-         $this->middleware('permission:category-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:category-delete', ['only' => ['destroy']]);
+         $this->middleware('permission:post-list|post-create|post-edit|post-delete', ['only' => ['index','show']]);
+         $this->middleware('permission:post-create', ['only' => ['create','store']]);
+         $this->middleware('permission:post-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:post-delete', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -26,8 +26,8 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Category::orderBy('id','DESC')->paginate(5);
-        return view('categories.index',compact('data'))
+        $data = Post::orderBy('id','DESC')->paginate(5);
+        return view('posts.index',compact('data'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
     
@@ -38,8 +38,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $roles = Role::pluck('name','name')->all();
-        return view('categories.create',compact('roles'));
+        $categories = Category::pluck('name','id')->all();
+        return view('posts.create',compact('categories'));
     }
     
     /**
@@ -51,15 +51,15 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required'
+            'title' => 'required'
         ]);
     
         $input = $request->all();
     
-        $category = Category::create($input);
+        $post = Post::create($input);
     
-        return redirect()->route('categories.index')
-                        ->with('success','Category created successfully');
+        return redirect()->route('posts.index')
+                        ->with('success','Post created successfully');
     }
     
     /**
@@ -70,8 +70,21 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $category = Category::find($id);
-        return view('categories.show',compact('category'));
+        $post = Post::find($id);
+        return view('posts.show',compact('post'));
+    }
+
+    public function display($categorySlug, $postSlug)
+    {
+        // Fetch the post with the category relation
+        $post = Post::with('category')
+            ->whereHas('category', function ($query) use ($categorySlug) {
+                $query->where('slug', $categorySlug);
+            })
+            ->where('slug', $postSlug)
+            ->firstOrFail();
+
+        return view('frontend.post.display', compact('post'));
     }
     
     /**
@@ -82,9 +95,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::find($id);
+        $post = Post::find($id);
     
-        return view('categories.edit',compact('category'));
+        return view('posts.edit',compact('post'));
     }
     
     /**
@@ -98,16 +111,15 @@ class CategoryController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'slug' => 'required'
             
         ]);
     
         $input = $request->all();
        
-        $category = Category::find($id);
-        $category->update($input);
-        return redirect()->route('categories.index')
-                        ->with('success','Category updated successfully');
+        $post = Post::find($id);
+        $post->update($input);
+        return redirect()->route('posts.index')
+                        ->with('success','Post updated successfully');
     }
     
     /**
@@ -118,8 +130,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        Category::find($id)->delete();
-        return redirect()->route('categories.index')
-                        ->with('success','Category deleted successfully');
+        Post::find($id)->delete();
+        return redirect()->route('post.index')
+                        ->with('success','Post deleted successfully');
     }
 }

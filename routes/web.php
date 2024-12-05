@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RolepermissionController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,5 +38,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('modules', ModuleController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('rolepermissions', RolepermissionController::class); 
+    Route::resource('posts', PostController::class);//for crud
+    Route::get('/{categorySlug}/{postSlug}', [PostController::class, 'display'])->name('post.display');//for front end
 
 });

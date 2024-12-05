@@ -27,28 +27,36 @@
                     @endif
                     {!! Form::open(array('route' => 'categories.store','method'=>'POST')) !!}
                     <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="col-xs-4 col-sm-4 col-md-4">
                             <div class="form-group">
                                 <strong>Name*:</strong>
                                 {!! Form::text('name', null, array('required'=>true,'placeholder' => 'Name','class' => 'form-control'))
                                 !!}
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="col-xs-4 col-sm-4 col-md-4">
+                            <div class="form-group">
+                                <strong>Slug*:</strong>
+                                {!! Form::text('slug', null, array('required'=>true,'placeholder' => 'Slug','class' => 'form form-control'))
+                                !!}
+                            </div>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-4"></div>
+                        <div class="col-xs-4 col-sm-4 col-md-4">
                             <div class="form-group">
                                 <strong>Meta Title:</strong>
                                 {!! Form::text('meta_title', null, array('placeholder' => 'Meta Title','class' => 'form-control'))
                                 !!}
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="col-xs-4 col-sm-4 col-md-4">
                             <div class="form-group">
                                 <strong>Meta Keyword:</strong>
                                 {!! Form::text('meta_keyword', null,array('placeholder' => 'Meta Keyword','class' =>
                                 'form-control')) !!}
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="col-xs-4 col-sm-4 col-md-4">
                             <div class="form-group">
                                 <strong>Meta Description:</strong>
                                 {!! Form::text('meta_description', null, array('placeholder' => 'Meta Description','class'

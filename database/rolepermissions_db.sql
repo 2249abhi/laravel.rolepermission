@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2024 at 07:03 PM
+-- Generation Time: Dec 05, 2024 at 08:07 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
+  `slug` varchar(255) DEFAULT NULL,
   `meta_title` varchar(255) DEFAULT NULL,
   `meta_keyword` text DEFAULT NULL,
   `meta_description` text DEFAULT NULL,
@@ -43,10 +44,11 @@ CREATE TABLE `categories` (
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`id`, `name`, `meta_title`, `meta_keyword`, `meta_description`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
-(1, 'Php', 'Php Interview Question Answer', 'Php Interview Question Answer', 'Php Interview Question Answer for Experienced', NULL, NULL, '2024-12-03 17:57:47', '2024-12-03 17:57:47'),
-(2, 'Mysql', 'Mysql Interview Question Answer', 'Mysql Interview Question Answer', 'Mysql Interview Question Answer for Experienced', NULL, NULL, '2024-12-03 18:02:33', '2024-12-03 18:02:33'),
-(3, 'Laravel', 'Laravel Interview Questions', 'Laravel Interview Questions', 'Laravel Interview Questions', NULL, NULL, '2024-12-03 18:03:21', '2024-12-03 18:03:21');
+INSERT INTO `categories` (`id`, `name`, `slug`, `meta_title`, `meta_keyword`, `meta_description`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
+(1, 'Php', 'php', 'Php Interview Question Answer', 'Php Interview Question Answer', 'Php Interview Question Answer for Experienced', NULL, NULL, '2024-12-03 17:57:47', '2024-12-03 17:57:47'),
+(2, 'Mysql', 'mysql', 'Mysql Interview Question Answer', 'Mysql Interview Question Answer', 'Mysql Interview Question Answer for Experienced', NULL, NULL, '2024-12-03 18:02:33', '2024-12-03 18:02:33'),
+(3, 'Laravel', 'laravel', 'Laravel Interview Questions', 'Laravel Interview Questions', 'Laravel Interview Questions', NULL, NULL, '2024-12-03 18:03:21', '2024-12-03 18:03:21'),
+(4, 'Javascript', 'javascript', 'javscript', 'javscript, interview, question, answer', 'javscript interview questions', NULL, NULL, '2024-12-05 16:46:24', '2024-12-05 17:28:23');
 
 -- --------------------------------------------------------
 
@@ -165,7 +167,12 @@ INSERT INTO `modules` (`id`, `name`, `description`, `pid`, `cid`, `controller`, 
 (709, 'Index', 'Category-Index', 708, 0, 'categories', 'index', '1.000', NULL, '2024-12-03 16:31:07', '2024-12-03 16:31:07'),
 (710, 'Create', 'Category-Create', 708, 0, 'categories', 'create', '2.000', NULL, '2024-12-03 16:31:07', '2024-12-03 16:31:07'),
 (711, 'Edit', 'Category-Edit', 708, 0, 'categories', 'edit', '3.000', NULL, '2024-12-03 16:31:07', '2024-12-03 16:31:07'),
-(712, 'Destroy', 'Category-Destroy', 708, 0, 'categories', 'destroy', '4.000', NULL, '2024-12-03 16:31:07', '2024-12-03 16:31:07');
+(712, 'Destroy', 'Category-Destroy', 708, 0, 'categories', 'destroy', '4.000', NULL, '2024-12-03 16:31:07', '2024-12-03 16:31:07'),
+(713, 'Post', 'Post', 0, 0, '', '', '7.000', NULL, '2024-12-05 17:07:15', '2024-12-05 17:07:15'),
+(714, 'Index', 'Post-Index', 713, 0, 'posts', 'index', '1.000', NULL, '2024-12-05 17:07:15', '2024-12-05 17:07:15'),
+(715, 'Create', 'Post-Create', 713, 0, 'posts', 'create', '2.000', NULL, '2024-12-05 17:07:15', '2024-12-05 17:07:15'),
+(716, 'Edit', 'Post-Edit', 713, 0, 'posts', 'edit', '3.000', NULL, '2024-12-05 17:07:15', '2024-12-05 17:07:15'),
+(717, 'Destroy', 'Post-Destroy', 713, 0, 'posts', 'destroy', '4.000', NULL, '2024-12-05 17:07:15', '2024-12-05 17:07:15');
 
 -- --------------------------------------------------------
 
@@ -217,7 +224,41 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 (22, 'category-index', 'web', '2024-12-03 11:01:07', '2024-12-03 11:01:07'),
 (23, 'category-create', 'web', '2024-12-03 11:01:07', '2024-12-03 11:01:07'),
 (24, 'category-edit', 'web', '2024-12-03 11:01:07', '2024-12-03 11:01:07'),
-(25, 'category-destroy', 'web', '2024-12-03 11:01:07', '2024-12-03 11:01:07');
+(25, 'category-destroy', 'web', '2024-12-03 11:01:07', '2024-12-03 11:01:07'),
+(26, 'post-index', 'web', '2024-12-05 11:37:15', '2024-12-05 11:37:15'),
+(27, 'post-create', 'web', '2024-12-05 11:37:15', '2024-12-05 11:37:15'),
+(28, 'post-edit', 'web', '2024-12-05 11:37:15', '2024-12-05 11:37:15'),
+(29, 'post-destroy', 'web', '2024-12-05 11:37:15', '2024-12-05 11:37:15');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `posts`
+--
+
+CREATE TABLE `posts` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `slug` varchar(255) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `content` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `posts`
+--
+
+INSERT INTO `posts` (`id`, `title`, `slug`, `category_id`, `content`, `created_at`, `updated_at`) VALUES
+(1, 'Core Php', 'core-php', 1, 'Core Php Interview Questions', '2024-12-05 13:10:21', '2024-12-05 18:41:22'),
+(2, 'Laravel', 'laravel', 1, 'Laravel Interview Questions', '2024-12-05 13:11:46', '2024-12-05 18:45:42'),
+(3, 'Cake Php', 'cake-php', 1, 'Cake Php Interview Questions', '2024-12-05 13:15:11', '2024-12-05 13:15:11'),
+(4, 'Mysql', 'mysql', 2, 'Mysql Interview Questions', '2024-12-05 13:17:12', '2024-12-05 13:17:12'),
+(5, 'Postgre Sql', 'postgre-sql', 2, 'Postgre Sql Interview Question', '2024-12-05 13:17:58', '2024-12-05 13:17:58'),
+(6, 'Core Javascript', 'core-javascript', 4, 'Core Javascript interview Questions', '2024-12-05 13:19:12', '2024-12-05 13:19:12'),
+(7, 'JQuery', 'jquery', 4, 'JQuery Interview Questions', '2024-12-05 13:19:57', '2024-12-05 13:19:57'),
+(8, 'React Js', 'reactjs', 4, 'React Js Interview Questions', '2024-12-05 13:20:37', '2024-12-05 13:20:37');
 
 -- --------------------------------------------------------
 
@@ -1160,7 +1201,11 @@ INSERT INTO `roles_permissions` (`id`, `role_id`, `mid`, `navigationshow`, `modu
 (9414, 7, 704, 0, 'Product', 'Index', '2024-12-03 11:56:43', '2024-12-03 17:26:43'),
 (9415, 7, 705, 1, 'Product', 'Create', '2024-12-03 11:56:43', '2024-12-03 17:26:43'),
 (9416, 7, 706, 1, 'Product', 'Edit', '2024-12-03 11:56:43', '2024-12-03 17:26:43'),
-(9417, 7, 707, 1, 'Product', 'Destroy', '2024-12-03 11:56:43', '2024-12-03 17:26:43');
+(9417, 7, 707, 1, 'Product', 'Destroy', '2024-12-03 11:56:43', '2024-12-03 17:26:43'),
+(9418, 7, 714, 0, 'Post', 'Index', '2024-12-05 11:38:32', '2024-12-05 17:08:32'),
+(9419, 7, 715, 1, 'Post', 'Create', '2024-12-05 11:38:32', '2024-12-05 17:08:32'),
+(9420, 7, 716, 1, 'Post', 'Edit', '2024-12-05 11:38:32', '2024-12-05 17:08:32'),
+(9421, 7, 717, 1, 'Post', 'Destroy', '2024-12-05 11:38:32', '2024-12-05 17:08:32');
 
 -- --------------------------------------------------------
 
@@ -1196,11 +1241,13 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (18, 7),
 (19, 1),
 (19, 7),
-(20, 7),
 (22, 7),
 (23, 7),
 (24, 7),
-(25, 7);
+(26, 7),
+(27, 7),
+(28, 7),
+(29, 7);
 
 -- --------------------------------------------------------
 
@@ -1228,7 +1275,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `hint`, `role_id`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Super Admin', 'admin@gmail.com', NULL, '$2y$10$tqVbM1v1Skih/IITHr2EMOWxY5Sk9H19RsncC0xQyLtMc1Mt55WsK', '123456', 1, NULL, '2023-10-06 03:15:10', '2023-10-06 03:15:10'),
 (2, 'Manager', 'manager@gmail.com', NULL, '$2y$10$tqVbM1v1Skih/IITHr2EMOWxY5Sk9H19RsncC0xQyLtMc1Mt55WsK', '123456', 7, NULL, '2023-10-06 04:28:29', '2023-10-06 04:28:29'),
-(3, 'Employee', 'employee@gmail.com', NULL, '$2y$10$tqVbM1v1Skih/IITHr2EMOWxY5Sk9H19RsncC0xQyLtMc1Mt55WsK', '123456', 7, NULL, '2023-11-28 03:31:46', '2023-11-28 03:31:46');
+(3, 'Employee', 'employee@gmail.com', NULL, '$2y$10$tqVbM1v1Skih/IITHr2EMOWxY5Sk9H19RsncC0xQyLtMc1Mt55WsK', '123456', 7, NULL, '2023-11-28 03:31:46', '2024-12-05 11:49:40');
 
 --
 -- Indexes for dumped tables
@@ -1238,7 +1285,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `hi
 -- Indexes for table `categories`
 --
 ALTER TABLE `categories`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `slug` (`slug`);
 
 --
 -- Indexes for table `failed_jobs`
@@ -1277,6 +1325,13 @@ ALTER TABLE `password_resets`
 --
 ALTER TABLE `permissions`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `posts`
+--
+ALTER TABLE `posts`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `slug` (`slug`);
 
 --
 -- Indexes for table `products`
@@ -1318,7 +1373,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -1336,13 +1391,19 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `modules`
 --
 ALTER TABLE `modules`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=713;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=718;
 
 --
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT for table `posts`
+--
+ALTER TABLE `posts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -1360,7 +1421,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `roles_permissions`
 --
 ALTER TABLE `roles_permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9418;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9422;
 
 --
 -- AUTO_INCREMENT for table `users`

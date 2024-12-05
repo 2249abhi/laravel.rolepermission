@@ -8,10 +8,10 @@
             <div class="card">
                 <div class="card-header">
                     <div class="pull-left">
-                        <h2>Create New User</h2>
+                        <h2>Create New Post</h2>
                     </div>
                     <div class="pull-right">
-                        <a class="btn btn-primary" href="{{ route('users.index') }}"> Back</a>
+                        <a class="btn btn-primary" href="{{ route('posts.index') }}"> Back</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -25,41 +25,32 @@
                         </ul>
                     </div>
                     @endif
-                    {!! Form::open(array('route' => 'users.store','method'=>'POST')) !!}
+                    {!! Form::open(array('route' => 'posts.store','method'=>'POST')) !!}
                     <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="col-xs-4 col-sm-4 col-md-4">
                             <div class="form-group">
-                                <strong>Name:</strong>
-                                {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control'))
+                                <strong>Category*:</strong>
+                                {!! Form::select('category_id', ['' => '--Select--'] + $categories, null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-4">
+                            <div class="form-group">
+                                <strong>Name*:</strong>
+                                {!! Form::text('title', null, array('required'=>true,'placeholder' => 'Name','class' => 'form-control'))
+                                !!}
+                            </div>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-4">
+                            <div class="form-group">
+                                <strong>Slug*:</strong>
+                                {!! Form::text('slug', null, array('required'=>true,'placeholder' => 'Slug','class' => 'form form-control'))
                                 !!}
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
-                                <strong>Email:</strong>
-                                {!! Form::text('email', null, array('placeholder' => 'Email','class' => 'form-control'))
-                                !!}
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>Password:</strong>
-                                {!! Form::password('password', array('placeholder' => 'Password','class' =>
-                                'form-control')) !!}
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>Confirm Password:</strong>
-                                {!! Form::password('confirm-password', array('placeholder' => 'Confirm Password','class'
-                                => 'form-control')) !!}
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>Role:</strong>
-                                {!! Form::select('role',['' => '--Select--']+ $roles, null, ['class' => 'form-control'])
-                                !!}
+                                <strong>Content:</strong>
+                                {!! Form::textarea('content', null, ['class' => 'form-control', 'rows' => 5]) !!}
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
@@ -72,4 +63,9 @@
         </div>
     </div>
 </div>
+
+
+
+
+
 @endsection
