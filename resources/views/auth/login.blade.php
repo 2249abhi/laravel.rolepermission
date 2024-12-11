@@ -73,11 +73,11 @@
                 <div class="row g-5">
                     <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
                         <div class="contact-item">
-                            <div class="pb-5">
-                                <h4 class="text-primary">Contact Us</h4>
-                                <!-- <h1 class="display-4 mb-4">Get In Touch With Us</h1>
-                                <p class="mb-0">The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and you're done. <a class="text-primary fw-bold" href="https://htmlcodex.com/contact-form">Download Now</a>.</p> -->
-                            </div>
+                            <h4 class="text-primary">Contact Us</h4>
+                            <!-- <div class="pb-5">
+                                <h1 class="display-4 mb-4">Get In Touch With Us</h1>
+                                <p class="mb-0">The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and you're done. <a class="text-primary fw-bold" href="https://htmlcodex.com/contact-form">Download Now</a>.</p> 
+                            </div>-->
                             <div class="d-flex align-items-center mb-4">
                                 <div class="bg-primary btn-lg-square rounded-circle p-4"><i class="fa fa-home text-white"></i></div>
                                 <div class="ms-4">
@@ -144,8 +144,8 @@
         <div class="container-fluid copyright py-4">
             <div class="container">
                 <div class="row g-4 align-items-center">
-                    <div class="col-md-12 text-center text-md-start mb-md-0">
-                        <span class="text-body"><a href="#" class="border-bottom text-primary"><i class="fas fa-copyright text-light me-2"></i>Getinfoplus.com</a>, All right reserved.</span>
+                    <div class="col-md-12 text-center ">
+                        <span class="text-body"><a href="#" class=" text-primary"><i class="fas fa-copyright text-light me-2"></i>Getinfoplus.com</a>, All right reserved.</span>
                     </div>
                     <!-- <div class="col-md-6 text-center text-md-end text-body"> -->
                         <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
@@ -160,7 +160,7 @@
 
 
         <!-- Back to Top -->
-        <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>   
+        <!-- <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>    -->
 
         
     <!-- JavaScript Libraries -->
