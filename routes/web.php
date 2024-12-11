@@ -10,6 +10,7 @@ use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RolepermissionController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\Frontend\FrontendController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,14 +23,16 @@ use App\Http\Controllers\PostController;
 |
 */
 
+
+Route::get('/frontend', [FrontendController::class, 'index'])->name('frontend.index');
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
-
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+Auth::routes();
 Route::group(['middleware' => ['auth']], function() {
 
     Route::resource('roles', RoleController::class);
@@ -39,6 +42,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('categories', CategoryController::class);
     Route::resource('rolepermissions', RolepermissionController::class); 
     Route::resource('posts', PostController::class);//for crud
-    Route::get('/{categorySlug}/{postSlug}', [PostController::class, 'display'])->name('post.display');//for front end
+    //Route::get('/{categorySlug}/{postSlug}', [PostController::class, 'display'])->name('post.display');//for front end
+
+   
 
 });
