@@ -36,24 +36,18 @@
                         @foreach ($data as $key => $post)
                         <tr>
                             <td>{{ ++$i }}</td>
-                            <td>{{ $post->category->name }}</td>
+                            <td><label class="badge badge-success">{{ $post->category->name }}</label></td>
                             <td>{{ $post->title }}</td>
                             <td>{{ $post->slug }}</td>
                             <td>{{ $post->created_at }}</td>
                             <td>
-                                <form action="{{ route('posts.destroy',$post->id) }}" method="POST">
-                                    <a class="btn btn-info" href="{{ route('posts.show',$post->id) }}">Show</a>
-                                    @can('post-edit')
-                                    <a class="btn btn-primary" href="{{ route('posts.edit',$post->id) }}">Edit</a>
-                                    @endcan
-
-
-                                    @csrf
-                                    @method('DELETE')
-                                    @can('post-delete')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                    @endcan
-                                </form>
+                                <a class="btn btn-info" href="{{ route('posts.show',$post->id) }}">Show</a>
+                                <a class="btn btn-primary" href="{{ route('posts.edit',$post->id) }}">Edit</a>
+                                {!! Form::open(['method' => 'DELETE','route' => ['posts.destroy',
+                                $post->id],'style'=>'display:inline'])
+                                !!}
+                                {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                                {!! Form::close() !!}
                             </td>
                         </tr>
                         @endforeach
@@ -64,4 +58,16 @@
     </div>
 </div>
 {!! $data->render() !!}
+<style>
+    svg:not(:root) {
+    height: 12px;
+}
+nav div:first-child {
+  float: left !important;
+}
+
+nav div:last-child {
+  float: right !important;
+}
+</style>
 @endsection

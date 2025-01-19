@@ -26,9 +26,10 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Post::orderBy('id','DESC')->paginate(5);
+        $pagination = 10;
+        $data = Post::orderBy('id','DESC')->paginate($pagination);
         return view('posts.index',compact('data'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+            ->with('i', ($request->input('page', 1) - 1) * $pagination);
     }
     
     /**
@@ -55,6 +56,8 @@ class PostController extends Controller
         ]);
     
         $input = $request->all();
+
+        $input['slug'] = str_replace(" ","-",strtolower($input['title']));
     
         $post = Post::create($input);
     
@@ -96,8 +99,9 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
+        $categories = Category::pluck('name','id')->all();
     
-        return view('posts.edit',compact('post'));
+        return view('posts.edit',compact('post','categories'));
     }
     
     /**
@@ -109,14 +113,16 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required',
+        // $this->validate($request, [
+        //     'name' => 'required',
             
-        ]);
+        // ]);
     
         $input = $request->all();
        
         $post = Post::find($id);
+
+        $input['slug'] = str_replace(" ","-",strtolower($input['title']));
         $post->update($input);
         return redirect()->route('posts.index')
                         ->with('success','Post updated successfully');

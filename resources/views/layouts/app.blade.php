@@ -1,24 +1,29 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
-      <!-- Required meta tags -->
-      <meta charset="utf-8">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}">
     <link href="{{ asset('assets/vendor/fonts/circular-std/style.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/libs/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/fontawesome/css/fontawesome-all.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css') }}">
     <script src="{{ asset('assets/vendor/jquery/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.js') }}"></script>
     <script src="{{ asset('assets/vendor/slimscroll/jquery.slimscroll.js') }}"></script>
     <script src="{{ asset('assets/libs/js/main-js.js') }}"></script>
-    <title>{{ config('app.name', 'Laravel 8 User Roles and Permissions Tutorial') }}</title>
+    <script src="{{ asset('assets/js/ckeditor.js') }}"></script>
+
+    <title>{{ config('app.name', 'Laravel 8 User Roles and Permissions with Dynamic Sidebar') }}</title>
     <!-- Styles -->
     <!-- <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet"> -->
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> -->
 </head>
+
 <body>
     <!-- ============================================================== -->
     <!-- main wrapper -->
@@ -27,7 +32,7 @@
         <!-- ============================================================== -->
         <!-- navbar -->
         <!-- ============================================================== -->
-        
+
         @guest
         @else
         @include('layouts.header')
@@ -82,7 +87,21 @@
             @endguest
         </div>
     </div>
-    
-    
+    <script>
+    ClassicEditor
+        .create(document.querySelector('.editor'), {
+            height: '500px' // Set your desired height
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    </script>
+    <style>
+    .ck-editor__editable_inline {
+        min-height: 200px;
+    }
+    </style>
+
 </body>
+
 </html>

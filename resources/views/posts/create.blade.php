@@ -2,6 +2,11 @@
 
 
 @section('content')
+<style>
+    .ck-editor__editable_inline {
+    min-height: 200px;
+}
+</style>
 <div class="container-fluid dashboard-content">
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -27,32 +32,7 @@
                     @endif
                     {!! Form::open(array('route' => 'posts.store','method'=>'POST')) !!}
                     <div class="row">
-                        <div class="col-xs-4 col-sm-4 col-md-4">
-                            <div class="form-group">
-                                <strong>Category*:</strong>
-                                {!! Form::select('category_id', ['' => '--Select--'] + $categories, null, ['class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="col-xs-4 col-sm-4 col-md-4">
-                            <div class="form-group">
-                                <strong>Name*:</strong>
-                                {!! Form::text('title', null, array('required'=>true,'placeholder' => 'Name','class' => 'form-control'))
-                                !!}
-                            </div>
-                        </div>
-                        <div class="col-xs-4 col-sm-4 col-md-4">
-                            <div class="form-group">
-                                <strong>Slug*:</strong>
-                                {!! Form::text('slug', null, array('required'=>true,'placeholder' => 'Slug','class' => 'form form-control'))
-                                !!}
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>Content:</strong>
-                                {!! Form::textarea('content', null, ['class' => 'form-control', 'rows' => 5]) !!}
-                            </div>
-                        </div>
+                        @include('posts.form')
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
@@ -63,9 +43,4 @@
         </div>
     </div>
 </div>
-
-
-
-
-
 @endsection
