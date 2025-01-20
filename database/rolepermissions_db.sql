@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 05, 2024 at 08:07 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 7.4.27
+-- Generation Time: Jan 20, 2025 at 07:16 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `rolepermissions`
+-- Database: `laravel`
 --
 
 -- --------------------------------------------------------
@@ -38,7 +38,7 @@ CREATE TABLE `categories` (
   `updated_by` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `categories`
@@ -58,11 +58,11 @@ INSERT INTO `categories` (`id`, `name`, `slug`, `meta_title`, `meta_keyword`, `m
 
 CREATE TABLE `failed_jobs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uuid` varchar(255) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -74,7 +74,7 @@ CREATE TABLE `failed_jobs` (
 
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -97,7 +97,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 
 CREATE TABLE `model_has_permissions` (
   `permission_id` bigint(20) UNSIGNED NOT NULL,
-  `model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model_type` varchar(255) NOT NULL,
   `model_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -109,7 +109,7 @@ CREATE TABLE `model_has_permissions` (
 
 CREATE TABLE `model_has_roles` (
   `role_id` bigint(20) UNSIGNED NOT NULL,
-  `model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model_type` varchar(255) NOT NULL,
   `model_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -130,17 +130,17 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 
 CREATE TABLE `modules` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(200) CHARACTER SET utf8 NOT NULL,
-  `description` text CHARACTER SET utf8 DEFAULT NULL,
+  `name` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `description` text CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `pid` int(11) NOT NULL DEFAULT 0,
   `cid` int(11) DEFAULT NULL,
-  `controller` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
-  `action` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `controller` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `action` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `depth` decimal(6,3) NOT NULL,
   `icon` varchar(20) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `modules`
@@ -181,8 +181,8 @@ INSERT INTO `modules` (`id`, `name`, `description`, `pid`, `cid`, `controller`, 
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -194,8 +194,8 @@ CREATE TABLE `password_resets` (
 
 CREATE TABLE `permissions` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `guard_name` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -244,7 +244,7 @@ CREATE TABLE `posts` (
   `content` text DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `posts`
@@ -258,7 +258,15 @@ INSERT INTO `posts` (`id`, `title`, `slug`, `category_id`, `content`, `created_a
 (5, 'Postgre Sql', 'postgre-sql', 2, 'Postgre Sql Interview Question', '2024-12-05 13:17:58', '2024-12-05 13:17:58'),
 (6, 'Core Javascript', 'core-javascript', 4, 'Core Javascript interview Questions', '2024-12-05 13:19:12', '2024-12-05 13:19:12'),
 (7, 'JQuery', 'jquery', 4, 'JQuery Interview Questions', '2024-12-05 13:19:57', '2024-12-05 13:19:57'),
-(8, 'React Js', 'reactjs', 4, 'React Js Interview Questions', '2024-12-05 13:20:37', '2024-12-05 13:20:37');
+(8, 'React Js', 'reactjs', 4, 'React Js Interview Questions', '2024-12-05 13:20:37', '2024-12-05 13:20:37'),
+(9, 'What is composer, why we use it ?', 'What-is-composer,-why-we-use-it-?', 3, '<p>It is a <strong>application level package manager</strong> for php.</p>', '2025-01-19 11:17:47', '2025-01-19 11:17:47'),
+(10, 'What are contracts ?', 'what-are-contracts-?', 3, '<p>Set of Interfaces.<br>Example: Queue, Mailer.</p>', '2025-01-19 11:19:38', '2025-01-19 11:19:38'),
+(11, 'What is Service Provider ?', 'what-is-service-provider-?', 3, '<p>A service provider in Laravel is a class that bootstraps an application by registering services and dependencies.</p><p>Service providers are <strong>the central place to configure your application</strong></p><p>Path: config/app.php<br>&nbsp;</p><p>&nbsp;</p>', '2025-01-19 11:22:58', '2025-01-19 11:22:58'),
+(12, 'What is Facade ?', 'what-is-facade-?', 3, '<p>&nbsp;</p>', '2025-01-19 11:23:55', '2025-01-19 11:23:55'),
+(13, 'What is Service Container ?', 'what-is-service-container-?', 3, '<p>Service Container is a powerful tool to manage class dependency and dependency injection.</p>', '2025-01-19 11:26:19', '2025-01-19 11:26:19'),
+(14, 'What is dependency Injection ?', 'what-is-dependency-injection-?', 3, '<p>&nbsp;</p>', '2025-01-19 11:27:10', '2025-01-19 11:27:10'),
+(15, 'What is sql Injection ?', 'what-is-sql-injection-?', 3, '<p>Laravel provides built-in features and best practices to protect against SQL injection attacks: Query Builder: Laravel\'s Query Builder provides a fluent interface for creating database queries using PHP code.&nbsp;<br><strong>The Query Builder automatically escapes user input, preventing SQL injection attacks</strong>.<br>SQL injection attacks can be prevented by validating user input, using parameterized queries, and limiting access to databases.</p>', '2025-01-19 11:27:33', '2025-01-19 12:11:28'),
+(16, 'What is eloquent ORM ?', 'what-is-eloquent-orm-?', 3, '<p>Object Relationship mapping.</p>', '2025-01-19 11:28:59', '2025-01-19 11:28:59');
 
 -- --------------------------------------------------------
 
@@ -268,8 +276,8 @@ INSERT INTO `posts` (`id`, `title`, `slug`, `category_id`, `content`, `created_a
 
 CREATE TABLE `products` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `detail` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `detail` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -290,8 +298,8 @@ INSERT INTO `products` (`id`, `name`, `detail`, `created_at`, `updated_at`) VALU
 
 CREATE TABLE `roles` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `guard_name` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -320,7 +328,7 @@ CREATE TABLE `roles_permissions` (
   `moduletask` varchar(200) NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `roles_permissions`
@@ -1202,10 +1210,10 @@ INSERT INTO `roles_permissions` (`id`, `role_id`, `mid`, `navigationshow`, `modu
 (9415, 7, 705, 1, 'Product', 'Create', '2024-12-03 11:56:43', '2024-12-03 17:26:43'),
 (9416, 7, 706, 1, 'Product', 'Edit', '2024-12-03 11:56:43', '2024-12-03 17:26:43'),
 (9417, 7, 707, 1, 'Product', 'Destroy', '2024-12-03 11:56:43', '2024-12-03 17:26:43'),
-(9418, 7, 714, 0, 'Post', 'Index', '2024-12-05 11:38:32', '2024-12-05 17:08:32'),
-(9419, 7, 715, 1, 'Post', 'Create', '2024-12-05 11:38:32', '2024-12-05 17:08:32'),
-(9420, 7, 716, 1, 'Post', 'Edit', '2024-12-05 11:38:32', '2024-12-05 17:08:32'),
-(9421, 7, 717, 1, 'Post', 'Destroy', '2024-12-05 11:38:32', '2024-12-05 17:08:32');
+(9422, 1, 714, 0, 'Post', 'Index', '2025-01-19 08:48:23', '2025-01-19 14:18:23'),
+(9423, 1, 715, 1, 'Post', 'Create', '2025-01-19 08:48:23', '2025-01-19 14:18:23'),
+(9424, 1, 716, 1, 'Post', 'Edit', '2025-01-19 08:48:23', '2025-01-19 14:18:23'),
+(9425, 1, 717, 1, 'Post', 'Destroy', '2025-01-19 08:48:23', '2025-01-19 14:18:23');
 
 -- --------------------------------------------------------
 
@@ -1244,9 +1252,13 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (22, 7),
 (23, 7),
 (24, 7),
+(26, 1),
 (26, 7),
+(27, 1),
 (27, 7),
+(28, 1),
 (28, 7),
+(29, 1),
 (29, 7);
 
 -- --------------------------------------------------------
@@ -1257,13 +1269,13 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `hint` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `hint` varchar(200) DEFAULT NULL,
   `role_id` int(11) DEFAULT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1403,7 +1415,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -1421,7 +1433,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `roles_permissions`
 --
 ALTER TABLE `roles_permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9422;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9426;
 
 --
 -- AUTO_INCREMENT for table `users`

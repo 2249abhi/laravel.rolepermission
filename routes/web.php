@@ -24,12 +24,16 @@ use App\Http\Controllers\Frontend\FrontendController;
 */
 
 
-// Route::get('/frontend', [FrontendController::class, 'index'])->name('frontend.index');
+Route::get('/interview-questions', [FrontendController::class, 'interview'])->name('frontend.interview');
 
 Route::get('/', function () {
     return view('frontend.index');
     // return view('welcome');
 });
+
+// Route::get('/interview-questions', function () {
+//     return view('frontend.interview');
+// });
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
