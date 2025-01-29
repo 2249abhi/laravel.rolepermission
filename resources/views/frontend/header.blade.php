@@ -21,16 +21,17 @@
 
     <!-- Libraries Stylesheet -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link href="frontend/lib/animate/animate.min.css" rel="stylesheet">
-    <link href="frontend/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="frontend/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="{{ asset('frontend/lib/animate/animate.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('frontend/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('frontend/lib/lightbox/css/lightbox.min.css') }}" rel="stylesheet">
+    
 
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="frontend/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('frontend/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="frontend/css/style.css" rel="stylesheet">
+    <link href="{{ asset('frontend/css/style.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -91,26 +92,27 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0">
                         <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="about.html" class="nav-item nav-link">About</a>
+                        <!-- <a href="about.html" class="nav-item nav-link">About</a>
                         <a href="service.html" class="nav-item nav-link">Services</a>
-                        <a href="project.html" class="nav-item nav-link">Projects</a>
+                        <a href="project.html" class="nav-item nav-link">Projects</a> -->
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Interview Questions</a>
                             <div class="dropdown-menu m-0">
-                                <a href="blog.html" class="dropdown-item">Our Blog</a>
-                                <a href="team.html" class="dropdown-item">Our Team</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                <a href="faqs.html" class="dropdown-item">FAQs</a>
-                                <a href="404.html" class="dropdown-item">404 Page</a>
+                            
+                                <!-- <a href="blog.html" class="dropdown-item">OOPS</a> -->
+                                <a href="{{ route('frontend.interview', ['categorySlug' => 'php']) }}" class="dropdown-item">Php</a>
+                                <a href="{{ route('frontend.interview', ['categorySlug' => 'mysql']) }}" class="dropdown-item">Mysql</a>
+                                <a href="{{ route('frontend.interview', ['categorySlug' => 'laravel']) }}" class="dropdown-item">Laravel</a>
+                                <a href="{{ route('frontend.interview', ['categorySlug' => 'javascript']) }}" class="dropdown-item">Javascript</a>
                             </div>
                         </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="https://abhishek.getinfoplus.com" target="_blank" class="nav-item nav-link">Contact</a>
                     </div>
                     <div class="d-flex align-items-center flex-nowrap pt-xl-0">
                         <!-- <button class="btn btn-primary btn-md-square mx-2" data-bs-toggle="modal"
                             data-bs-target="#searchModal"><i class="fas fa-search"></i></button> -->
-                        <a href="login"
-                            class="btn btn-primary rounded-pill text-white py-2 px-4 ms-2 flex-wrap flex-sm-shrink-0">Login</a>
+                        <!-- <a href="login"
+                            class="btn btn-primary rounded-pill text-white py-2 px-4 ms-2 flex-wrap flex-sm-shrink-0">Login</a> -->
                     </div>
                 </div>
             </nav>

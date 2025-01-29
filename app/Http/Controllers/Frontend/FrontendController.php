@@ -21,11 +21,28 @@ class FrontendController extends Controller
         return view('frontend.index');
     }
 
-    public function interview()
+    public function interview($categorySlug)
     {
-       
-        $data = Post::select('title','content')->where('category_id',3)->get();
+       //echo $category;die;
+       // $data = Post::select('title','content')->where('category_id',3)->get();
+       $data = Post::select('title','content')->with('category')
+            ->whereHas('category', function ($query) use ($categorySlug) {
+                $query->where('slug', $categorySlug);
+            })
+            //->where('slug', $postSlug)
+            ->get();
 
         return view('frontend.interview',compact('data'));
     }
+
+    // public function interview()
+    // {
+       
+    //     $data = Post::select('title','content')->where('category_id',3)->get()->toArray();
+
+    //     echo '<pre>';
+    //     print_r($data);die;
+
+    //     return view('frontend.interview',compact('data'));
+    // }
 }

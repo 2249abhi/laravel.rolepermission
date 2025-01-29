@@ -23,8 +23,8 @@ use App\Http\Controllers\Frontend\FrontendController;
 |
 */
 
-
-Route::get('/interview-questions', [FrontendController::class, 'interview'])->name('frontend.interview');
+Route::get('/interview-questions/{categorySlug}', [FrontendController::class, 'interview'])->name('frontend.interview');
+//http://localhost/laravel.rolepermission/public/interview-questions/laravel
 
 Route::get('/', function () {
     return view('frontend.index');
