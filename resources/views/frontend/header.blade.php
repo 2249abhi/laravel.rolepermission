@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Investa - Investment Website Template</title>
+    <title>GetInfoPlus - Ultimate Resource for PHP, Laravel, MySQL, CakePHP & JavaScript Interview Questions</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -49,25 +49,23 @@
             <div class="row gx-0 align-items-center" style="height: 45px;">
                 <div class="col-lg-8 text-center text-lg-start mb-lg-0">
                     <div class="d-flex flex-wrap">
-                        <a href="#" class="text-muted me-4"><i class="fas fa-map-marker-alt text-primary me-2"></i>Find
-                            A
-                            Location</a>
+                        <!-- <a href="#" class="text-muted me-4"><i class="fas fa-map-marker-alt text-primary me-2"></i>Find A Location</a> -->
                         <a href="#" class="text-muted me-4"><i
-                                class="fas fa-phone-alt text-primary me-2"></i>+01234567890</a>
+                                class="fas fa-phone-alt text-primary me-2"></i>+919711493272</a>
                         <a href="#" class="text-muted me-0"><i
-                                class="fas fa-envelope text-primary me-2"></i>Example@gmail.com</a>
+                                class="fas fa-envelope text-primary me-2"></i>support@getinfoplus.com</a>
                     </div>
                 </div>
                 <div class="col-lg-4 text-center text-lg-end">
                     <div class="d-flex align-items-center justify-content-end">
-                        <a href="#" class="btn btn-primary btn-square rounded-circle nav-fill me-3"><i
-                                class="fab fa-facebook-f text-white"></i></a>
-                        <a href="#" class="btn btn-primary btn-square rounded-circle nav-fill me-3"><i
-                                class="fab fa-twitter text-white"></i></a>
-                        <a href="#" class="btn btn-primary btn-square rounded-circle nav-fill me-3"><i
-                                class="fab fa-instagram text-white"></i></a>
-                        <a href="#" class="btn btn-primary btn-square rounded-circle nav-fill me-0"><i
-                                class="fab fa-linkedin-in text-white"></i></a>
+                        <a href="https://www.linkedin.com/in/abhi2249" class="btn btn-primary btn-square rounded-circle nav-fill me-3"><i
+                                class="fab fa-linkedin text-white"></i></a>
+                        <a href="https://wa.me/919711493272" class="btn btn-primary btn-square rounded-circle nav-fill me-3"><i
+                                class="fab fa-whatsapp text-white"></i></a>
+                        <a href="https://join.skype.com/invite/lfUnA9bHGY70" class="btn btn-primary btn-square rounded-circle nav-fill me-3"><i
+                                class="fab fa-skype text-white"></i></a>
+                        <a href="https://github.com/2249abhi/" class="btn btn-primary btn-square rounded-circle nav-fill me-0"><i
+                                class="fab fa-github text-white"></i></a>
                     </div>
                 </div>
             </div>
@@ -83,7 +81,7 @@
         <div class="container px-0">
             <nav class="navbar navbar-expand-lg navbar-dark bg-white py-3 px-4">
                 <a href="index.html" class="navbar-brand p-0">
-                    <h1 class="text-primary m-0"><i class="fas fa-donate me-3"></i>Investa</h1>
+                    <h1 class="text-primary m-0"><img height="50px;" src="{{ asset('frontend/img/getinfologo.webp')}}" />Getinfoplus</h1>
                     <!-- <img src="frontend/img/logo.png" alt="Logo"> -->
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -92,8 +90,8 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0">
                         <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <!-- <a href="about.html" class="nav-item nav-link">About</a>
-                        <a href="service.html" class="nav-item nav-link">Services</a>
+                        <a href="#about" class="nav-item nav-link">About</a>
+                        <!--<a href="service.html" class="nav-item nav-link">Services</a>
                         <a href="project.html" class="nav-item nav-link">Projects</a> -->
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Interview Questions</a>

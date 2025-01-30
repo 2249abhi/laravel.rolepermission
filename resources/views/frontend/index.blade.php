@@ -31,28 +31,28 @@
 
 
 <!-- Services Start -->
-@include('frontend.service')
+<!-- @include('frontend.service') -->
 <!-- Services End -->
 
 
 <!-- Project Start -->
-@include('frontend.project')
+<!-- @include('frontend.project') -->
 <!-- Project End -->
 
 
 <!-- Blog Start -->
 
-@include('frontend.blog')
+<!-- @include('frontend.blog') -->
 <!-- Blog End -->
 
 
 <!-- Team Start -->
-@include('frontend.team')
+<!-- @include('frontend.team') -->
 <!-- Team End -->
 
 
 <!-- Testimonial Start -->
-@include('frontend.feedback')
+<!-- @include('frontend.feedback') -->
 <!-- Testimonial End -->
 
 

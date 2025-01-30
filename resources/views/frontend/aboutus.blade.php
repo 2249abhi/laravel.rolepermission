@@ -1,4 +1,4 @@
-<div class="container-fluid about bg-light py-5">
+<div class="container-fluid about bg-light py-5" id="about">
     <div class="container py-5">
         <div class="row g-5 align-items-center">
             <div class="col-lg-6 col-xl-5 wow fadeInLeft" data-wow-delay="0.1s">
@@ -9,24 +9,21 @@
             </div>
             <div class="col-lg-6 col-xl-7 wow fadeInRight" data-wow-delay="0.3s">
                 <h4 class="text-primary">About Us</h4>
-                <h1 class="display-5 mb-4">The most Profitable Investments company in worldwide.</h1>
-                <p class="text ps-4 mb-4">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores atque nihil
-                    unde quisquam, deleniti illo a. Quam harum laboriosam, laudantium, deleniti perferendis voluptates
-                    ex non laborum libero magni, minus illo!
-                </p>
+                <h1 class="display-5 mb-4">Empowering Developers with Knowledge</h1>
+                <p class="text ps-4 mb-4">Welcome to GetInfoPlus, your ultimate resource for mastering <b>PHP, Laravel, CakePHP, MySQL, and JavaScript</b>. Our mission is to provide <b>comprehensive interview questions and answers</b>, helping developers and job seekers sharpen their skills and succeed in technical interviews. Whether you're a <b>beginner</b> exploring web development or an <b>experienced developer</b> preparing for your next big opportunity, we offer well-structured content, real-world coding examples, and expert insights to keep you ahead in the industry. <br/><br/>At <b>GetInfoPlus</b>, we believe in continuous learning and knowledge sharing. Our platform covers <b>backend development, database optimization, object-oriented programming (OOP), REST APIs, coding best practices</b>, and more. Stay updated with the latest trends and elevate your expertise with our <b>in-depth tutorials and interview preparation guides</b>.</p>
                 <div class="row g-4 justify-content-between mb-5">
                     <div class="col-lg-6 col-xl-5">
-                        <p class="text-dark"><i class="fas fa-check-circle text-primary me-1"></i> Strategy & Consulting
+                        <p class="text-dark"><i class="fas fa-check-circle text-primary me-1"></i> PHP
                         </p>
-                        <p class="text-dark mb-0"><i class="fas fa-check-circle text-primary me-1"></i> Business Process
+                        <p class="text-dark mb-0"><i class="fas fa-check-circle text-primary me-1"></i> Mysql
                         </p>
                     </div>
                     <div class="col-lg-6 col-xl-7">
-                        <p class="text-dark"><i class="fas fa-check-circle text-primary me-1"></i> Marketing Rules</p>
-                        <p class="text-dark mb-0"><i class="fas fa-check-circle text-primary me-1"></i> Partnerships</p>
+                        <p class="text-dark"><i class="fas fa-check-circle text-primary me-1"></i> Cake Php</p>
+                        <p class="text-dark mb-0"><i class="fas fa-check-circle text-primary me-1"></i> Laravel</p>
                     </div>
                 </div>
-                <div class="row g-4 justify-content-between mb-5">
+                <!-- <div class="row g-4 justify-content-between mb-5">
                     <div class="col-xl-5"><a href="#" class="btn btn-primary rounded-pill py-3 px-5">Discover More</a>
                     </div>
                     <div class="col-xl-7 mb-5">
@@ -80,7 +77,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
