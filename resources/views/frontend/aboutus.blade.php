@@ -3,8 +3,8 @@
         <div class="row g-5 align-items-center">
             <div class="col-lg-6 col-xl-5 wow fadeInLeft" data-wow-delay="0.1s">
                 <div class="about-img">
-                    <img src="frontend/img/about-3.png" class="img-fluid w-100 rounded-top bg-white" alt="Image">
-                    <img src="frontend/img/about-2.jpg" class="img-fluid w-100 rounded-bottom" alt="Image">
+                    <img src="frontend/img/about.jpg" class="img-fluid w-100 rounded-top bg-white" alt="Image">
+                    <img src="frontend/img/about-1.jpg" style="margin-top:5px;" class="img-fluid w-100 rounded-bottom" alt="Image">
                 </div>
             </div>
             <div class="col-lg-6 col-xl-7 wow fadeInRight" data-wow-delay="0.3s">

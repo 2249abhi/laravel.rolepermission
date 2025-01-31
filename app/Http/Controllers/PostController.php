@@ -26,7 +26,7 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        $pagination = 10;
+        $pagination = 20;
         $data = Post::orderBy('id','DESC')->paginate($pagination);
         return view('posts.index',compact('data'))
             ->with('i', ($request->input('page', 1) - 1) * $pagination);

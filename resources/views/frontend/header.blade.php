@@ -50,10 +50,12 @@
                 <div class="col-lg-8 text-center text-lg-start mb-lg-0">
                     <div class="d-flex flex-wrap">
                         <!-- <a href="#" class="text-muted me-4"><i class="fas fa-map-marker-alt text-primary me-2"></i>Find A Location</a> -->
-                        <a href="#" class="text-muted me-4"><i
+                        <a href="https://wa.me/919711493272" class="text-muted me-4"><i
                                 class="fas fa-phone-alt text-primary me-2"></i>+919711493272</a>
-                        <a href="#" class="text-muted me-0"><i
+                        <a href="mailto:support@getinfoplus.com" class="text-muted me-4"><i
                                 class="fas fa-envelope text-primary me-2"></i>support@getinfoplus.com</a>
+                        <a href="mailto:abhishekshr7@gmail.com" class="text-muted me-0"><i
+                                class="fas fa-envelope text-primary me-2"></i>abhishekshr7@gmail.com</a>
                     </div>
                 </div>
                 <div class="col-lg-4 text-center text-lg-end">
@@ -80,8 +82,8 @@
         </div>
         <div class="container px-0">
             <nav class="navbar navbar-expand-lg navbar-dark bg-white py-3 px-4">
-                <a href="index.html" class="navbar-brand p-0">
-                    <h1 class="text-primary m-0"><img height="50px;" src="{{ asset('frontend/img/getinfologo.webp')}}" />Getinfoplus</h1>
+                <a href="https://www.getinfoplus.com" class="navbar-brand p-0">
+                    <h1 class="text-primary m-0"><i class="fas fa-book-open me-3"></i>Getinfoplus</h1>
                     <!-- <img src="frontend/img/logo.png" alt="Logo"> -->
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -89,7 +91,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
+                        <a href="https://www.getinfoplus.com" class="nav-item nav-link active">Home</a>
                         <a href="#about" class="nav-item nav-link">About</a>
                         <!--<a href="service.html" class="nav-item nav-link">Services</a>
                         <a href="project.html" class="nav-item nav-link">Projects</a> -->
