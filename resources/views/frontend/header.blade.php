@@ -24,7 +24,7 @@
     <link href="{{ asset('frontend/lib/animate/animate.min.css') }}" rel="stylesheet">
     <link href="{{ asset('frontend/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
     <link href="{{ asset('frontend/lib/lightbox/css/lightbox.min.css') }}" rel="stylesheet">
-    
+
 
 
     <!-- Customized Bootstrap Stylesheet -->
@@ -32,6 +32,18 @@
 
     <!-- Template Stylesheet -->
     <link href="{{ asset('frontend/css/style.css') }}" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WX8DYJSFEG"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'G-WX8DYJSFEG');
+    </script>
 </head>
 
 <body>
@@ -60,13 +72,17 @@
                 </div>
                 <div class="col-lg-4 text-center text-lg-end">
                     <div class="d-flex align-items-center justify-content-end">
-                        <a href="https://www.linkedin.com/in/abhi2249" class="btn btn-primary btn-square rounded-circle nav-fill me-3"><i
+                        <a href="https://www.linkedin.com/in/abhi2249"
+                            class="btn btn-primary btn-square rounded-circle nav-fill me-3"><i
                                 class="fab fa-linkedin text-white"></i></a>
-                        <a href="https://wa.me/919711493272" class="btn btn-primary btn-square rounded-circle nav-fill me-3"><i
+                        <a href="https://wa.me/919711493272"
+                            class="btn btn-primary btn-square rounded-circle nav-fill me-3"><i
                                 class="fab fa-whatsapp text-white"></i></a>
-                        <a href="https://join.skype.com/invite/lfUnA9bHGY70" class="btn btn-primary btn-square rounded-circle nav-fill me-3"><i
+                        <a href="https://join.skype.com/invite/lfUnA9bHGY70"
+                            class="btn btn-primary btn-square rounded-circle nav-fill me-3"><i
                                 class="fab fa-skype text-white"></i></a>
-                        <a href="https://github.com/2249abhi/" class="btn btn-primary btn-square rounded-circle nav-fill me-0"><i
+                        <a href="https://github.com/2249abhi/"
+                            class="btn btn-primary btn-square rounded-circle nav-fill me-0"><i
                                 class="fab fa-github text-white"></i></a>
                     </div>
                 </div>
@@ -96,14 +112,19 @@
                         <!--<a href="service.html" class="nav-item nav-link">Services</a>
                         <a href="project.html" class="nav-item nav-link">Projects</a> -->
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Interview Questions</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Interview
+                                Questions</a>
                             <div class="dropdown-menu m-0">
-                            
+
                                 <!-- <a href="blog.html" class="dropdown-item">OOPS</a> -->
-                                <a href="{{ route('frontend.interview', ['categorySlug' => 'php']) }}" class="dropdown-item">Php</a>
-                                <a href="{{ route('frontend.interview', ['categorySlug' => 'mysql']) }}" class="dropdown-item">Mysql</a>
-                                <a href="{{ route('frontend.interview', ['categorySlug' => 'laravel']) }}" class="dropdown-item">Laravel</a>
-                                <a href="{{ route('frontend.interview', ['categorySlug' => 'javascript']) }}" class="dropdown-item">Javascript</a>
+                                <a href="{{ route('frontend.interview', ['categorySlug' => 'php']) }}"
+                                    class="dropdown-item">Php</a>
+                                <a href="{{ route('frontend.interview', ['categorySlug' => 'mysql']) }}"
+                                    class="dropdown-item">Mysql</a>
+                                <a href="{{ route('frontend.interview', ['categorySlug' => 'laravel']) }}"
+                                    class="dropdown-item">Laravel</a>
+                                <a href="{{ route('frontend.interview', ['categorySlug' => 'javascript']) }}"
+                                    class="dropdown-item">Javascript</a>
                             </div>
                         </div>
                         <a href="https://abhishek.getinfoplus.com" target="_blank" class="nav-item nav-link">Contact</a>
