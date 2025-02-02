@@ -18,6 +18,46 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <form action="{{ route('posts.index') }}" method="GET">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Category Name:</label>
+                                            <select name="category" class="form-control">
+                                                <option value="">--Select Category--</option>
+                                                @foreach($categories as $category)
+                                                    <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
+                                                        {{ $category->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Name:</label>
+                                            <input type="text" name="title" class="form-control" placeholder="Search by Name..." value="{{ request('title') }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Slug:</label>
+                                            <input type="text" name="slug" class="form-control" placeholder="Search by slug..." value="{{ request('slug') }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3" style="margin-top:20px;">
+                                        <button type="submit" class="btn btn-primary me-2">Search</button>
+                                        @if(request('title') || request('category') || request('slug'))
+                                            <a href="{{ route('posts.index') }}" class="btn btn-secondary">Clear</a>
+                                        @endif
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
                     @if ($message = Session::get('success'))
                     <div class="alert alert-success">
                         <p>{{ $message }}</p>
@@ -60,14 +100,16 @@
 {!! $data->render() !!}
 <style>
     svg:not(:root) {
-    height: 12px;
-}
-nav div:first-child {
-  float: left !important;
-}
-
-nav div:last-child {
-  float: right !important;
-}
+        height: 12px;
+    }
+    nav div:first-child {
+        float: left !important;
+        margin-top:-50px !important;
+    }
+    nav div:last-child {
+        float: right !important;
+        margin-top:-30px !important;
+    }
+    
 </style>
 @endsection

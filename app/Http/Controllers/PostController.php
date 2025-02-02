@@ -27,8 +27,28 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $pagination = 20;
-        $data = Post::orderBy('id','DESC')->paginate($pagination);
-        return view('posts.index',compact('data'))
+        $query = Post::with('category')->orderBy('id', 'DESC');
+        
+        // Get all categories for dropdown
+        $categories = Category::orderBy('name', 'ASC')->get();
+        
+        // Search by title
+        if ($request->has('title') && !empty($request->title)) {
+            $query->where('title', 'LIKE', "%{$request->title}%");
+        }
+        
+        // Search by category
+        if ($request->has('category') && !empty($request->category)) {
+            $query->where('category_id', $request->category);
+        }
+        
+        // Search by slug
+        if ($request->has('slug') && !empty($request->slug)) {
+            $query->where('slug', 'LIKE', "%{$request->slug}%");
+        }
+        
+        $data = $query->paginate($pagination);
+        return view('posts.index', compact('data', 'categories'))
             ->with('i', ($request->input('page', 1) - 1) * $pagination);
     }
     
