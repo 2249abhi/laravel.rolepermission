@@ -121,6 +121,8 @@
                                     class="dropdown-item">Php</a>
                                 <a href="{{ route('frontend.interview', ['categorySlug' => 'mysql']) }}"
                                     class="dropdown-item">Mysql</a>
+                                <a href="{{ route('frontend.interview', ['categorySlug' => 'API']) }}"
+                                    class="dropdown-item">API</a>
                                 <a href="{{ route('frontend.interview', ['categorySlug' => 'laravel']) }}"
                                     class="dropdown-item">Laravel</a>
                                 <a href="{{ route('frontend.interview', ['categorySlug' => 'javascript']) }}"
