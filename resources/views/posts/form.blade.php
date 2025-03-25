@@ -1,4 +1,3 @@
-
     <div class="col-xs-4 col-sm-4 col-md-4">
         <div class="form-group">
             <strong>Category*:</strong>
@@ -16,6 +15,10 @@
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Content:</strong>
-            {!! Form::textarea('content', null, ['class' => 'form-control editor', 'rows' => 5]) !!}
+            {!! Form::textarea('content', null, ['class' => 'form-control editor','id'=>'editor', 'rows' => 5]) !!}
         </div>
     </div>
+    <script>
+        // Initialize CKEditor
+        CKEDITOR.replace('editor');
+    </script>

@@ -16,7 +16,9 @@
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.js') }}"></script>
     <script src="{{ asset('assets/vendor/slimscroll/jquery.slimscroll.js') }}"></script>
     <script src="{{ asset('assets/libs/js/main-js.js') }}"></script>
-    <script src="{{ asset('assets/js/ckeditor.js') }}"></script>
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+    <!-- <script src="{{ asset('assets/js/ckeditor.js') }}"></script> -->
+
 
     <title>{{ config('app.name', 'Laravel 8 User Roles and Permissions with Dynamic Sidebar') }}</title>
     <!-- Styles -->
@@ -87,20 +89,7 @@
             @endguest
         </div>
     </div>
-    <script>
-    ClassicEditor
-        .create(document.querySelector('.editor'), {
-            height: '500px' // Set your desired height
-        })
-        .catch(error => {
-            console.error(error);
-        });
-    </script>
-    <style>
-    .ck-editor__editable_inline {
-        min-height: 200px;
-    }
-    </style>
+
 
 </body>
 

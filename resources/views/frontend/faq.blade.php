@@ -3,7 +3,6 @@
         <div class="row g-5 align-items-center">
             <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
                 <div class="pb-5">
-                    <h4 class="text-primary">FAQs</h4>
                     <h1 class="display-4">Get the Answers to Common Questions</h1>
                 </div>
                 <div class="accordion bg-light rounded p-4" id="accordionExample">
