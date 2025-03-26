@@ -11,8 +11,12 @@
     }
      ?></title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+    <?php 
+    $hkeywords = 'PHP interview questions, MySQL interview questions, Laravel interview questions, JavaScript interview questions, API interview questions, web development tutorials, coding interview questions, programming Q&A, developer resources, backend development, frontend development';
+    $hdescription = 'GetInfoPlus provides top interview questions and answers on PHP, MySQL, Laravel, JavaScript, APIs, and more. Enhance your coding skills, prepare for job interviews, and stay updated with the latest web development trends!';
+    ?>
+    <meta content="<?php echo $keywords ?? $hkeywords; ?>" name="keywords">
+    <meta content="<?php echo $description ?? $hdescription; ?>" name="description">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
