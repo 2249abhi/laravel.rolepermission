@@ -108,7 +108,7 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0">
                         <a href="https://www.getinfoplus.com" class="nav-item nav-link active">Home</a>
-                        <a href="#about" class="nav-item nav-link">About</a>
+                        <a href="https://www.getinfoplus.com/#about" class="nav-item nav-link">About</a>
                         <!--<a href="service.html" class="nav-item nav-link">Services</a>
                         <a href="project.html" class="nav-item nav-link">Projects</a> -->
                         <div class="nav-item dropdown">
