@@ -23,7 +23,7 @@ class FrontendController extends Controller
 
     public function interview($categorySlug)
     {
-       //echo $category;die;
+       
        // $data = Post::select('title','content')->where('category_id',3)->get();
        $data = Post::select('title','content')->with('category')
             ->whereHas('category', function ($query) use ($categorySlug) {
@@ -32,7 +32,8 @@ class FrontendController extends Controller
             //->where('slug', $postSlug)
             ->get();
 
-        return view('frontend.interview',compact('data'));
+        $title = ucfirst($categorySlug).' Interview Questions and Answers';
+        return view('frontend.interview',compact('title','data'));
     }
 
     // public function interview()
