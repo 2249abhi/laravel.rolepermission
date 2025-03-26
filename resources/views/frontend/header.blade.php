@@ -3,7 +3,13 @@
 
 <head>
     <meta charset="utf-8">
-    <title><?php echo $title ? 'GetInfoPlus - '.$title : 'GetInfoPlus - Ultimate Resource for PHP, Laravel, MySQL, CakePHP & JavaScript Interview Questions' ?></title>
+    <title><?php 
+    if(isset($title)) {
+        echo 'GetInfoPlus - '.$title;
+    } else {
+        echo 'GetInfoPlus - Ultimate Resource for PHP, Laravel, MySQL, CakePHP & JavaScript Interview Questions';
+    }
+     ?></title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
