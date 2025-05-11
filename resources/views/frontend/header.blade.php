@@ -137,6 +137,8 @@
                                     class="dropdown-item">Laravel</a>
                                 <a href="{{ route('frontend.interview', ['categorySlug' => 'javascript']) }}"
                                     class="dropdown-item">Javascript</a>
+                                <a href="{{ route('frontend.interview', ['categorySlug' => 'react']) }}"
+                                    class="dropdown-item">React</a>
                             </div>
                         </div>
                         <a href="https://abhishek.getinfoplus.com" target="_blank" class="nav-item nav-link">Contact</a>
