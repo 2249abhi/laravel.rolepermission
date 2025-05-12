@@ -4,7 +4,7 @@
         <div class="row g-5 align-items-center">
             <div class="col-lg-12 wow" >
                 <div class="pb-5">
-                    <h1 class="display-4">Get the Answers to Common Questions</h1>
+                    <h1 class="display-4">Interview Q&A – Crack Your Next Interview</h1>
                 </div>
                 <div class="accordion bg-light rounded p-4" id="accordionExample">
                     @foreach($data as $key => $post)
